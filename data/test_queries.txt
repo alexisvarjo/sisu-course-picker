@@ -1,0 +1,3 @@
+# Tiny query set for end-to-end smoke testing the ingester.
+algo
+prob

@@ -1,0 +1,128 @@
+# HY + Aalto code-prefix queries, narrow enough to avoid the API's
+# silent empty-result behaviour when total > ~1000.
+# Plus targeted name queries for topics the default stems miss.
+
+# HY math/stat/CS/data — narrow MAST/MAT prefixes
+MAST3
+MAST2
+MAT11
+MAT12
+MAT21
+MAT22
+MATR3
+DATA1
+DATA2
+TKT1
+TKT2
+
+# HY economics
+ECOM-
+
+# HY astro/physics (some scientific computing relevant)
+PAP3
+FYS1
+FYS2
+
+# HY other
+LSI3
+
+# Aalto math/stat
+MS-E1
+MS-E2
+MS-C1
+MS-C2
+MS-A0
+
+# Aalto CS/EE
+CS-E
+CS-A
+CS-C
+ELEC-C
+ELEC-E
+ELEC-D
+
+# Aalto finance/business
+FIN-E
+FIN-A
+28E
+28L
+28C
+31E
+TU-E
+
+# Aalto other
+ECON-A
+ECON-C
+ECON-E
+ECON-L
+
+# Topic stems missing from defaults
+sto
+ito
+itô
+tim
+brow
+mart
+poiss
+levy
+itera
+hpc
+gpu
+cuda
+mcmc
+kalm
+sde
+spde
+hank
+dsge
+ergodi
+filtr
+filte
+
+# English math/stat stems extra
+prob
+real
+funct
+optim
+asymp
+hyper
+spar
+deri
+opti
+nume
+para
+calc
+inte
+hilb
+banac
+sobol
+fourier
+diff
+bayesian
+
+# Finnish math/stat stems
+toden
+mitt
+mart
+ito
+markov
+brown
+funkt
+ositta
+osimi
+osasi
+optim
+osiit
+diffe
+hilb
+banach
+laplace
+normaali
+
+# Specific known-missing courses (full names)
+Probability theory I
+Probability theory II
+Stochastic Analysis I
+Stochastic Analysis II
+Time series analysis
+Markov chain

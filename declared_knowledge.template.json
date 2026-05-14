@@ -1,0 +1,17 @@
+{
+  "_comment": "Courses you have equivalent knowledge of, even though they aren't in your SISU transcript. The validator treats these as satisfying prereqs. The Claude Code session should ASK you before adding entries here — don't pre-fill speculatively. Copy this template to data/declared_knowledge.json when you start declaring.",
+  "courses": [
+    {
+      "code": "MS-C1541",
+      "groupId": null,
+      "note": "Self-studied from Rudin's Real and Complex Analysis, summer 2024. Comfortable with sigma-algebras, Lebesgue integration, dominated convergence.",
+      "declared_at": "2026-05-14"
+    },
+    {
+      "code": "CS-A1140",
+      "groupId": "aalto-OPINKOHD-1125614957",
+      "note": "Implemented data structures and algorithms in C++ at previous job; covered CLRS chapters 1-22.",
+      "declared_at": "2026-05-14"
+    }
+  ]
+}

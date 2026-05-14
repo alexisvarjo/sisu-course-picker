@@ -1,0 +1,37 @@
+# schedule.yaml — your period-by-period study plan
+#
+# Period keys: "<YYYY-YYYY>/<roman>" where Roman is the within-year period.
+# HY uses I–IV; Aalto uses I–V. The validator orders periods lexicographically,
+# so keep YYYY-YYYY consistent.
+#
+# Course codes must match codes in data/courses.jsonl exactly (e.g. "CS-A1140",
+# "MAT-21001"). The validator will complain if anything is missing.
+#
+# Empty list `[]` = open period. `schedule.py` will suggest candidates if
+# data/scored_courses.jsonl exists.
+
+plan:
+  # ----- Past (already completed) -----
+  "2024-2025/I":   [MAT-A0001, CS-A1110]
+  "2024-2025/II":  [MAT-A0002, CS-A1120]
+  "2024-2025/III": [MAT-A0003, CS-A1140]
+  "2024-2025/IV":  []
+
+  # ----- Current (in progress / planned) -----
+  "2025-2026/I":   [CS-E4500]
+  "2025-2026/II":  []
+  "2025-2026/III": []
+  "2025-2026/IV":  []
+
+  # ----- Future (open) -----
+  "2026-2027/I":   []
+  "2026-2027/II":  []
+
+constraints:
+  # Max ECTS per period before the validator warns. 15 is a typical Finnish
+  # full-time load (≈25h work/week).
+  max_credits_per_period: 15
+
+  # When suggesting fillers for empty periods, draw from the top-N of
+  # data/scored_courses.jsonl.
+  candidate_pool_top_n: 25
