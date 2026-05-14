@@ -157,14 +157,8 @@ cover for what's missing.
 |---|---|---|---|
 | MAST31036 | Convex analysis and optimization I | 5 | Line-search methods, gradient/Newton/conjugate-gradient/Levenberg-Marquardt. Dropped this round to make room for ECOM-434 + MAST30170. CVXPY tutorials + Boyd's free EE364A material covers the practical need. |
 | MAST31041 | Convex analysis and optimization II | 5 | Continuation; same comment. |
-| MAST30172 / 30173 | Partial differential equations I / II | 5 + 5 | Only if you invest in academic math-finance research and accept the ODE prereq overhead. |
 | MAST30132 | Real and Fourier Analysis | 5 | Add only if FA I + Probability Theory I together don't feel like enough analysis foundation for the stochastic analysis sequence. |
-| MAST31802 | Risk theory | 10 | If you want insurance / credit-risk angle (actuarial). |
-| MAST31806 | Advanced risk theory | 5 | Lighter follow-on to MAST31802. |
 | MAST32017 | Nonparametric Inference | 5 | Distribution-free methods. Borderline for inclusion — your stats block is already 25 ECTS. Add only if you specifically want this content. |
-| ECOM-R321 | Advanced Econometrics 3: Macroeconometrics | 5 | Heavy overlap with MAST32008 + ECOM-411 — generally redundant given current plan. |
-| ECOM-410 | Applied Macroeconomics | 5 | Lighter quantitative-macro intro; ECOM-411/412 cover the meaty material. |
-| MAT12004 | Statistical inference I | 5 | Bachelor-level basics; mostly review for someone with your math BSc. |
 
 ## Open issues
 
