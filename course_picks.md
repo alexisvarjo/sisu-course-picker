@@ -80,7 +80,7 @@ ELEC-C7241 is the canonical single networking course at Aalto.
 |---|---|---|---|
 | MAST32008 | Time series analysis II | 5 | Multivariate VAR; specification, estimation, evaluation, hypothesis testing, forecasting. (TS I is in Aalto vapaasti.) |
 
-### Quant macro (HY MSc Economics, cross-faculty) — 20 ECTS
+### Quant macro (HY MSc Economics, cross-faculty) — 25 ECTS
 
 | Code | Course | ECTS | Why |
 |---|---|---|---|
@@ -88,6 +88,7 @@ ELEC-C7241 is the canonical single networking course at Aalto.
 | ECOM-412 | Applied Macroeconometrics 2 | 5 | DSGE empirical implementation, structural VAR depth, validation of DSGE via VAR. |
 | ECOM-R318 | Advanced Macroeconomics 4: Heterogeneous Agent Models | 5 | HANK with applications to taxation, social insurance, pensions. |
 | ECOM-R319 | Advanced Macroeconomics 3: Monetary Policy Models | 5 | Monetary-policy DSGEs — central-bank-flavoured macro modelling. |
+| ECOM-434 | Money and Monetary Policy | 5 | Institutional / applied side of monetary economics; complements R319's DSGE-flavoured view. |
 
 ### Stochastic + applied quant — 5 ECTS
 
@@ -95,12 +96,11 @@ ELEC-C7241 is the canonical single networking course at Aalto.
 |---|---|---|---|
 | MAST30142 | Stochastic Methods of Energy Markets | 5 | Electricity & gas market modelling, energy-derivative pricing, post-2008 regulatory environment. Applied stochastic finance with a macro/commodities flavour. |
 
-### Optimization — 10 ECTS
+### Math foundations — 5 ECTS
 
 | Code | Course | ECTS | Why |
 |---|---|---|---|
-| MAST31036 | Convex analysis and optimization I | 5 | Line-search methods, gradient/Newton/conjugate-gradient/Levenberg-Marquardt, convergence analysis. |
-| MAST31041 | Convex analysis and optimization II | 5 | Continuation; the modern optimization toolkit underpins portfolio optimization, RL, and numerical methods generally. |
+| MAST30170 | Functional Analysis I | 5 | Banach/Hilbert/operators. Directly load-bearing for the Stochastic Analysis sequence (martingales in L^2, operator theory for stochastic integration). Addresses the prereq-risk flag from earlier drafts in coursework rather than self-study. |
 
 ### Statistics + Bayesian — 25 ECTS
 
@@ -112,7 +112,7 @@ ELEC-C7241 is the canonical single networking course at Aalto.
 | MAT22005 | Bayesian inference | 5 | Posteriors, multiparameter models, R + Stan workflow. |
 | MAST32004 | Advanced Bayesian Inference | 5 | Marginal likelihood, decision theory, model comparison, CV / info criteria. |
 
-**HY total: 10 + 10 + 5 + 5 + 20 + 5 + 10 + 25 = 90 ECTS.** ✓
+**HY total: 10 + 10 + 5 + 5 + 25 + 5 + 5 + 25 = 90 ECTS.** ✓
 
 ---
 
@@ -120,6 +120,9 @@ ELEC-C7241 is the canonical single networking course at Aalto.
 
 - **Swapped FIN-E0310 (Advances in Financial Technology, 6) → ELEC-C7241 (Computer Networks, 5)** in Aalto vapaasti — your one networking course.
 - **Considered then rejected CS-E4690 Programming Parallel Supercomputers (Aalto, 5)** — covers MPI / distributed-memory HPC. Real value for HFT/market-making engineering and at-scale Monte Carlo, but the actual HFT toolkit (kernel bypass, FPGAs, lock-free C++, microsecond budgets) isn't taught at Aalto anyway. CS-E4580 (already done) covers the higher-leverage multicore + GPU half. The MPI/HPC mental model can be picked up from a book + weekend project at lower cost than 5 ECTS.
+- **Dropped MAST31036 + MAST31041 Convex Analysis & Optimization I + II (10 ECTS)** — practical optimization content can be picked up from CVXPY tutorials + Boyd's free EE364A material. Made room for ECOM-434 + MAST30170.
+- **Added ECOM-434 Money and Monetary Policy (5)** — institutional / applied complement to ECOM-R319's DSGE-flavoured monetary policy.
+- **Added MAST30170 Functional Analysis I (5)** — addresses the prereq risk for the Stochastic Analysis sequence in coursework instead of self-study.
 - **Dropped MAST31910 Financial Economics (10 ECTS)** — content (arbitrage pricing, equilibrium, CAPM) heavily overlaps with `28L30111` Theoretical Asset Pricing, `FIN-E0311` Advanced Investments, and the existing FRM Derivatives chain on the Aalto side.
 - **Dropped MATR326 Tools of HPC (5)** — materials-science-flavoured, and you've already done Aalto's Programming Parallel Computers. No second HPC needed.
 - **Dropped MAST30172 + MAST30173 Partial Differential Equations I + II (10)** — would also require Differentiaaliyhtälöt I + II (10 ECTS ODE prereqs you don't currently have), making it a 20 ECTS commitment to unlock 10 ECTS of PDE. For quant macro and applied quant, PDEs at this depth are not core. Black-Scholes-PDE intuition can be picked up from Shreve / Björk or via the Stochastic Analysis sequence; the heavy PDE machinery is mainly for academic math-finance research.
@@ -137,31 +140,31 @@ ELEC-C7241 is the canonical single networking course at Aalto.
 - **MAST31036 → MAST31041** — convex optimization I before II.
 - **MAST31908** — usable after Probability Theory II + a bit of Stochastic Analysis I.
 
-## Risk flag
+## Risk flag (largely addressed)
 
-You are skipping the Real Analysis / Functional Analysis foundation that
-the stochastic analysis sequence (MAST31706 / MAST31710) would normally
-build on. The HY math department's official prereqs for these courses are
-typically softer than they look, and your math BSc covers undergrad real
-analysis, so this should be workable — but if MAST31706 feels rough,
-self-studying functional analysis basics (Kreyszig or Folland chapters) is
-faster than picking up MAST30170.
+The Stochastic Analysis sequence (MAST31706 / MAST31710) leans on
+functional-analytic machinery (L^2 martingales, operator theory). MAST30170
+(Functional Analysis I) is now in the plan to cover this. Real Analysis +
+Fourier (MAST30132) is *not* — characteristic functions and Fourier
+material from Probability Theory I + the L^p material from FA I should
+suffice. If MAST31706 still feels rough mid-course, self-studying Folland
+or Kreyszig chapters on L^p spaces and Sobolev embeddings is the lighter
+cover for what's missing.
 
 ## Alternates / swap pool
 
 | Code | Course | ECTS | When you'd add it |
 |---|---|---|---|
-| MAST30172 / 30173 | Partial differential equations I / II | 5 + 5 | If you decide to invest in academic math-finance research and accept the ODE prereq overhead. |
-| MAST30132 | Real and Fourier Analysis | 5 | If MAST31706 feels too jumpy without a more formal analysis course. |
-| MAST30170 | Functional Analysis I | 5 | Same as above; or if you reinstate PDE. |
+| MAST31036 | Convex analysis and optimization I | 5 | Line-search methods, gradient/Newton/conjugate-gradient/Levenberg-Marquardt. Dropped this round to make room for ECOM-434 + MAST30170. CVXPY tutorials + Boyd's free EE364A material covers the practical need. |
+| MAST31041 | Convex analysis and optimization II | 5 | Continuation; same comment. |
+| MAST30172 / 30173 | Partial differential equations I / II | 5 + 5 | Only if you invest in academic math-finance research and accept the ODE prereq overhead. |
+| MAST30132 | Real and Fourier Analysis | 5 | Add only if FA I + Probability Theory I together don't feel like enough analysis foundation for the stochastic analysis sequence. |
 | MAST31802 | Risk theory | 10 | If you want insurance / credit-risk angle (actuarial). |
 | MAST31806 | Advanced risk theory | 5 | Lighter follow-on to MAST31802. |
-| MAST22013 → MAST32017 | Nonparametric Inference | 5 | If you want distribution-free methods after the inference sequence. |
+| MAST32017 | Nonparametric Inference | 5 | Distribution-free methods. Borderline for inclusion — your stats block is already 25 ECTS. Add only if you specifically want this content. |
 | ECOM-R321 | Advanced Econometrics 3: Macroeconometrics | 5 | Heavy overlap with MAST32008 + ECOM-411 — generally redundant given current plan. |
 | ECOM-410 | Applied Macroeconomics | 5 | Lighter quantitative-macro intro; ECOM-411/412 cover the meaty material. |
-| ECOM-434 | Money and Monetary Policy | 5 | Useful if your macro thesis tilts toward monetary-policy applications. |
-| MS-E1600 | Probability Theory D (Aalto) | 5 | Aalto's measure-theoretic probability — strict alternative to MAST31701. |
-| MAT12004 | Statistical inference I | 5 | If MAT22013 (IIA) feels like too big a jump from BSc. |
+| MAT12004 | Statistical inference I | 5 | Bachelor-level basics; mostly review for someone with your math BSc. |
 
 ## Open issues
 
