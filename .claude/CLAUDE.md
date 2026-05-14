@@ -77,35 +77,35 @@ them respecting prerequisites, and lay them out across academic periods.
 
 | Path | What | When it exists |
 |---|---|---|
-| `data/courses.jsonl` | Full catalog crawled from `kori` API. One full course-unit detail per line. The authoritative source for course content, outcomes, prereqs, credits, organisations. | After `python ingest_catalog.py` |
+| `data/courses.jsonl` | Full catalog crawled from `kori` API. One full course-unit detail per line. The authoritative source for course content, outcomes, prereqs, credits, organisations. | After `python tools/ingest_catalog.py` |
 | `data/courses.jsonl.gz` | Compressed shipping copy (~15 MB). | Optional |
-| `data/courses_extra.jsonl` | Courses resolved from orphan prereq references (older versions, out-of-scope universities). Same schema as `courses.jsonl`. | After `python resolve_orphans.py` |
-| `data/transcript.json` | User's completed courses, keyed by university (one block per SISU instance). | After `python fetch_transcript.py --domain X` |
-| `data/declared_knowledge.json` | User-declared equivalent-knowledge courses (self-study, work, prior uni). Satisfies prereqs without re-taking. | User-curated; see `declared_knowledge.template.json` |
-| `data/scored_courses.jsonl` | LLM-scored subset. One row per course: `{code, score, difficulty, reasoning, language}`. | After `python rank.py` |
-| `data/_orgs.json` | Cached `/kori/api/organisations` tree (for `filter_courses.py`). | Auto-cached |
-| `goals.md` | User-authored: career goal, interest areas, things to avoid, current level, constraints. | User writes (see `goals.template.md`) |
-| `schedule.yaml` | Period-by-period plan. The validator enforces ONE rule: prereqs scheduled before dependents. | User writes (see `schedule.template.yaml`) |
+| `data/courses_extra.jsonl` | Courses resolved from orphan prereq references (older versions, out-of-scope universities). Same schema as `courses.jsonl`. | After `python tools/resolve_orphans.py` |
+| `data/transcript.json` | User's completed courses, keyed by university (one block per SISU instance). | After `python tools/fetch_transcript.py --domain X` |
+| `data/declared_knowledge.json` | User-declared equivalent-knowledge courses (self-study, work, prior uni). Satisfies prereqs without re-taking. | User-curated; see `.claude/declared_knowledge.template.json` |
+| `data/scored_courses.jsonl` | LLM-scored subset. One row per course: `{code, score, difficulty, reasoning, language}`. | After `python tools/rank.py` |
+| `data/_orgs.json` | Cached `/kori/api/organisations` tree (for `tools/filter_courses.py`). | Auto-cached |
+| `goals.md` | User-authored: career goal, interest areas, things to avoid, current level, constraints. | User writes; treat the existing `goals.md` as the structural example |
+| `schedule.yaml` | Period-by-period plan. The validator enforces ONE rule: prereqs scheduled before dependents. | User writes (see `.claude/schedule.template.yaml`) |
 
 ## Helper scripts available
 
-- `ingest_catalog.py` — refresh the catalog. Defaults to HY + Aalto with academic-year staleness filter.
-- `filter_courses.py --list-orgs --root <uni-id>` — browse the org tree with course counts.
-- `filter_courses.py --blacklist-org-name "law" "medicine" --out data/filtered.jsonl` — drop branches you don't care about.
-- `prereq_graph.py before|after|chain <CODE>` — show prereq chain for a course.
-- `prereq_graph.py orphans` — list courses whose prereqs reference IDs not in catalog (~600). Run `resolve_orphans.py` to fix.
-- `fetch_transcript.py --domain sisu.helsinki.fi` — Playwright login → pull completed courses. Re-run per university.
-- `rank.py` — **OPTIONAL.** Bulk LLM scoring via Anthropic Batches API. Requires `ANTHROPIC_API_KEY` and API balance (separate from Claude Max subscription). Not part of the default workflow — ranking normally happens in-session.
-- `schedule.py` — validate `schedule.yaml`. Reports prereq ordering violations and credits-per-period issues. Suggests candidates for empty periods from `scored_courses.jsonl`.
-- `resolve_orphans.py` — fetch missing-prereq courses from SISU and write to `data/courses_extra.jsonl`.
+- `tools/ingest_catalog.py` — refresh the catalog. Defaults to HY + Aalto with academic-year staleness filter.
+- `tools/filter_courses.py --list-orgs --root <uni-id>` — browse the org tree with course counts.
+- `tools/filter_courses.py --blacklist-org-name "law" "medicine" --out data/filtered.jsonl` — drop branches you don't care about.
+- `tools/prereq_graph.py before|after|chain <CODE>` — show prereq chain for a course.
+- `tools/prereq_graph.py orphans` — list courses whose prereqs reference IDs not in catalog (~600). Run `tools/resolve_orphans.py` to fix.
+- `tools/fetch_transcript.py --domain sisu.helsinki.fi` — Playwright login → pull completed courses. Re-run per university.
+- `tools/rank.py` — **OPTIONAL.** Bulk LLM scoring via Anthropic Batches API. Requires `ANTHROPIC_API_KEY` and API balance (separate from Claude Max subscription). Not part of the default workflow — ranking normally happens in-session.
+- `tools/schedule.py` — validate `schedule.yaml`. Reports prereq ordering violations and credits-per-period issues. Suggests candidates for empty periods from `scored_courses.jsonl`.
+- `tools/resolve_orphans.py` — fetch missing-prereq courses from SISU and write to `data/courses_extra.jsonl`.
 
 ## Ranking and curriculum design (in-session)
 
-**The user runs on Claude Max alone — no separate API balance.** That means ranking does NOT happen via `rank.py` by default (`rank.py` bills against API credits, not the Max subscription). Instead, ranking happens through *this* Claude Code session.
+**The user runs on Claude Max alone — no separate API balance.** That means ranking does NOT happen via `tools/rank.py` by default (`tools/rank.py` bills against API credits, not the Max subscription). Instead, ranking happens through *this* Claude Code session.
 
 **Don't try to score all ~13k courses.** That's wasteful even on Max. The intended workflow:
 
-1. **Pre-filter the catalog first.** Before any scoring, narrow `data/courses.jsonl` down to a manageable candidate set using `filter_courses.py`:
+1. **Pre-filter the catalog first.** Before any scoring, narrow `data/courses.jsonl` down to a manageable candidate set using `tools/filter_courses.py`:
    - Drop irrelevant faculties (`--blacklist-org-name "law" "medicine" ...`)
    - Restrict by language (`--keep-attainment-language en`)
    - Restrict by code prefix if the user has strong domain focus
@@ -117,7 +117,7 @@ them respecting prerequisites, and lay them out across academic periods.
 
 4. **Iterate with the user.** Show top candidates, ask which directions resonate, refine. Use `prereq_graph.py before <code>` to map prereq chains.
 
-When the user has the patience and budget for a comprehensive score-everything pass, point them at `rank.py` — but flag that it requires `ANTHROPIC_API_KEY` and an API balance.
+When the user has the patience and budget for a comprehensive score-everything pass, point them at `tools/rank.py` — but flag that it requires `ANTHROPIC_API_KEY` and an API balance.
 
 ## Helping the user iterate on their curriculum
 
@@ -128,13 +128,13 @@ When the user opens a Claude Code session here, expect requests like:
 - *"Why is CS-E4500 scored so low?"*
   → Grep `data/scored_courses.jsonl` for the code; show the `reasoning` field. Cross-check against the course's `content` in `data/courses.jsonl`.
 - *"Add MS-A0001 to autumn 2025 period I"*
-  → Edit `schedule.yaml`, then run `python schedule.py` to validate.
+  → Edit `schedule.yaml`, then run `python tools/schedule.py` to validate.
 - *"What does CS-E4500 need beforehand?"*
-  → Run `python prereq_graph.py before CS-E4500`. Cross-reference results against the user's transcript and `data/declared_knowledge.json`.
+  → Run `python tools/prereq_graph.py before CS-E4500`. Cross-reference results against the user's transcript and `data/declared_knowledge.json`.
 - *"Build me a 4-period plan that gets me toward goal X"*
   → Read goals + scored + prereq graph. Propose a plan as YAML diff. Don't write to disk until the user confirms.
 
-### When `schedule.py` reports MISSING_PREREQS
+### When `tools/schedule.py` reports MISSING_PREREQS
 
 Don't treat it as a hard failure — prereqs are SOFT. Walk the user through each missing prereq:
 

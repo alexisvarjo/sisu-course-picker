@@ -10,18 +10,19 @@ validated, period-by-period `schedule.yaml`. Follow steps in order; do
 ## Prerequisites the user must have done before calling you
 
 1. SISU credentials for at least one Finnish university (Helsinki, Aalto, etc.).
-2. `goals.md` written from `goals.template.md` — be specific about career
+2. `goals.md` filled in (use the existing `goals.md` as the structural example) — be specific about career
    goal, weak-area topics, hard constraints (ECTS/period, deadlines),
    **which universities they have study rights at**, and **which
    faculties / topic areas to exclude**.
 3. (Optional but useful) Access to Anthropic API balance — only needed if
-   you want to use `rank.py` for batch scoring ~1000s of courses. The
+   you want to use `tools/rank.py` for batch scoring ~1000s of courses. The
    in-session Haiku-subagent flow below does not need it.
 
-If `goals.md` doesn't exist, ask the user to copy `goals.template.md` and
-fill it in. Don't proceed without it — every downstream decision flows
-from `goals.md`. In particular, the **Universities** and **Faculties /
-topic areas to exclude** sections drive Steps 2–3 directly.
+If `goals.md` doesn't exist or contains only the prior user's content,
+ask the user to overwrite it with their own. Don't proceed without it
+— every downstream decision flows from `goals.md`. In particular, the
+**Universities I can take courses at** and **Faculties / topic areas
+to exclude** sections drive Steps 2–3 directly.
 
 ---
 
@@ -44,8 +45,8 @@ Look for:
 ## Step 1: Fetch the transcript (per university)
 
 ```bash
-python fetch_transcript.py --domain sisu.helsinki.fi
-python fetch_transcript.py --domain sisu.aalto.fi
+python tools/fetch_transcript.py --domain sisu.helsinki.fi
+python tools/fetch_transcript.py --domain sisu.aalto.fi
 ```
 
 This launches Playwright; the user logs in interactively. Output is
@@ -58,7 +59,7 @@ recommendations.
 
 ## Step 2: Crawl the catalog — the hard part
 
-The default `ingest_catalog.py` has two silent failure modes that **will**
+The default `tools/ingest_catalog.py` has two silent failure modes that **will**
 cost you the user's most-wanted courses if you don't address them.
 
 ### Failure mode 1: API returns empty for high-cardinality queries
@@ -72,7 +73,7 @@ this, you'll miss MAST31701 (Probability Theory I), MAST31706
 HY math MSc curriculum.
 
 **Fix**: use narrow code-prefix queries. A working queries file lives at
-`queries_hyaalto.txt`. If it doesn't exist, write one with at minimum:
+`.claude/.claude/queries_hyaalto.txt`. If it doesn't exist, write one with at minimum:
 
 ```
 # HY math/stat/CS/data
@@ -155,8 +156,8 @@ needs is high (you have to re-ingest later).
 
 ```bash
 # Main crawl — no staleness filter, full coverage
-python ingest_catalog.py \
-  --queries-file queries_hyaalto.txt \
+python tools/ingest_catalog.py \
+  --queries-file .claude/queries_hyaalto.txt \
   --staleness-cutoff none \
   --out data/courses.jsonl \
   --workers 16 --rps 20
@@ -166,13 +167,13 @@ If catalog size becomes a problem (>20k entries), tighten to a 2-3 year
 window (`2023-08-01` or similar) — but only after confirming that
 hasn't dropped any user-requested courses.
 
-`ingest_catalog.py` is append-only and resumable — re-running with the
+`tools/ingest_catalog.py` is append-only and resumable — re-running with the
 same `--out` updates in place. If a specific code goes missing later,
 do a targeted re-fetch:
 
 ```bash
 echo -e "28L\nKTTS4190" > /tmp/missing.txt
-python ingest_catalog.py --queries-file /tmp/missing.txt \
+python tools/ingest_catalog.py --queries-file /tmp/missing.txt \
   --staleness-cutoff none --out data/courses.jsonl
 ```
 
@@ -228,7 +229,7 @@ needed.
 ### Step 3a: List the org tree first
 
 ```bash
-python filter_courses.py --list-orgs
+python tools/filter_courses.py --list-orgs
 ```
 
 This dumps every university and faculty/programme with course counts.
@@ -267,7 +268,7 @@ Combine three sources of exclusions, all inferred from `goals.md`:
 ### Step 3c: Run the filter
 
 ```bash
-python filter_courses.py \
+python tools/filter_courses.py \
   --in data/courses.jsonl \
   --out data/courses_filtered.jsonl \
   --blacklist-org-name <your derived list> \
@@ -279,7 +280,7 @@ If the user said "Finnish OK", include `fi`. English-only users:
 
 ### Step 3d: Post-filter by `universityOrgIds`
 
-`filter_courses.py` keeps cooperation-network courses hosted *at* user's
+`tools/filter_courses.py` keeps cooperation-network courses hosted *at* user's
 universities even if owned by another university. If the user said
 "only HY and Aalto", post-filter:
 
@@ -471,7 +472,7 @@ single course. Pair with HY's MAT22005 (Bayesian inference) → MAST32004
 
 ## Step 7: Build `schedule.yaml`
 
-Use `schedule.template.yaml` as the format reference. Key conventions:
+Use `.claude/schedule.template.yaml` as the format reference. Key conventions:
 
 - Period keys: `"YYYY-YYYY/I"` through `/IV` (HY) or `/V` (Aalto). The
   validator orders periods lexicographically.
@@ -485,7 +486,7 @@ Use `schedule.template.yaml` as the format reference. Key conventions:
   exactly.
 
 Sequence courses respecting:
-- Formal SISU prereqs (rare; check via `python prereq_graph.py before
+- Formal SISU prereqs (rare; check via `python tools/prereq_graph.py before
   <CODE>`).
 - Content prereqs (frequent; e.g., MAT22005 → MAST32004 even if SISU
   doesn't enforce).
@@ -499,7 +500,7 @@ Sequence courses respecting:
 ## Step 8: Validate
 
 ```bash
-python schedule.py \
+python tools/schedule.py \
   --schedule schedule.yaml \
   --catalog data/courses.jsonl \
   --transcript data/transcript.json
@@ -535,35 +536,35 @@ Don't write to `data/` unless explicitly asked. Don't overwrite
 
 ```bash
 # Fetch transcripts (interactive Playwright login)
-python fetch_transcript.py --domain sisu.helsinki.fi
-python fetch_transcript.py --domain sisu.aalto.fi
+python tools/fetch_transcript.py --domain sisu.helsinki.fi
+python tools/fetch_transcript.py --domain sisu.aalto.fi
 
 # Crawl catalog with the broad-coverage queries (no staleness filter)
-python ingest_catalog.py --queries-file queries_hyaalto.txt \
+python tools/ingest_catalog.py --queries-file .claude/queries_hyaalto.txt \
   --staleness-cutoff none --out data/courses.jsonl \
   --workers 16 --rps 20
 
 # Targeted re-fetch for missing codes
-python ingest_catalog.py --queries-file /tmp/missing.txt \
+python tools/ingest_catalog.py --queries-file /tmp/missing.txt \
   --staleness-cutoff none --out data/courses.jsonl
 
 # Filter
-python filter_courses.py --in data/courses.jsonl \
+python tools/filter_courses.py --in data/courses.jsonl \
   --out data/courses_filtered.jsonl \
   --blacklist-org-name "..." \
   --keep-attainment-language en fi
 
 # Browse the org tree (use this to find new things to blacklist)
-python filter_courses.py --list-orgs
+python tools/filter_courses.py --list-orgs
 
 # Prereq inspection
-python prereq_graph.py before <CODE>
-python prereq_graph.py after <CODE>
-python prereq_graph.py chain <CODE>
-python prereq_graph.py orphans
+python tools/prereq_graph.py before <CODE>
+python tools/prereq_graph.py after <CODE>
+python tools/prereq_graph.py chain <CODE>
+python tools/prereq_graph.py orphans
 
 # Schedule validation
-python schedule.py --schedule schedule.yaml \
+python tools/schedule.py --schedule schedule.yaml \
   --catalog data/courses.jsonl --transcript data/transcript.json
 ```
 

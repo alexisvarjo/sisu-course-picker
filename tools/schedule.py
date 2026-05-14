@@ -334,7 +334,7 @@ def main():
     args = ap.parse_args()
 
     if not Path(args.schedule).exists():
-        sys.exit(f"Missing {args.schedule}. See schedule.template.yaml.")
+        sys.exit(f"Missing {args.schedule}. See .claude/schedule.template.yaml.")
 
     with open(args.schedule, encoding="utf-8") as f:
         cfg = yaml.safe_load(f) or {}

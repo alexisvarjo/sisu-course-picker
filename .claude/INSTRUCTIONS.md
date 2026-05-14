@@ -9,10 +9,10 @@ university federation (Helsinki, Aalto, and ~7 others). Workflow:
 3. Write `goals.md` saying what you want to learn.
 4. Open a Claude Code session, let it browse the catalog against your goals
    and propose a multi-period plan.
-5. Iterate. Validate the plan with `schedule.py`. Repeat.
+5. Iterate. Validate the plan with `tools/schedule.py`. Repeat.
 
 It runs **on a Claude Max subscription alone** — no separate Anthropic API
-balance is required. (One script, `rank.py`, *is* API-based but is fully
+balance is required. (One script, `tools/rank.py`, *is* API-based but is fully
 optional and only useful if you want a one-shot score-everything pass.)
 
 ---
@@ -25,7 +25,7 @@ optional and only useful if you want a one-shot score-everything pass.)
 4. [Step 2 — Write `goals.md`](#step-2--write-goalsmd)
 5. [Step 3 — Pre-filter the catalog](#step-3--pre-filter-the-catalog-recommended)
 6. [Step 4 — Design the curriculum in a Claude Code session](#step-4--design-the-curriculum-in-a-claude-code-session)
-7. [Step 5 — Validate your plan with `schedule.py`](#step-5--validate-your-plan)
+7. [Step 5 — Validate your plan with `tools/schedule.py`](#step-5--validate-your-plan)
 8. [How prerequisites work](#how-prerequisites-work-the-three-tier-model)
 9. [Script reference](#script-reference)
 10. [File reference](#file-reference)
@@ -70,12 +70,12 @@ playwright install chromium     # one-time browser download (~150 MB)
 `requirements.txt` already lists everything you need:
 - `playwright` — for the transcript fetcher
 - `pyyaml` — for `schedule.yaml` parsing
-- `anthropic` — only used by the optional `rank.py`
+- `anthropic` — only used by the optional `tools/rank.py`
 
-You can skip `anthropic` if you're sure you'll never run `rank.py`.
+You can skip `anthropic` if you're sure you'll never run `tools/rank.py`.
 
 The catalog (`data/courses.jsonl`) is already present — 12,983 currently-active
-courses, last refreshed by `ingest_catalog.py`. You don't need to re-crawl
+courses, last refreshed by `tools/ingest_catalog.py`. You don't need to re-crawl
 unless courses have meaningfully changed (start of each academic year is a
 reasonable cadence).
 
@@ -88,7 +88,7 @@ which is essential for ranking ("don't suggest things I've done") and for
 prerequisite satisfaction.
 
 ```bash
-python fetch_transcript.py --domain sisu.helsinki.fi
+python tools/fetch_transcript.py --domain sisu.helsinki.fi
 ```
 
 A Chromium window will open at `https://sisu.helsinki.fi/student/`. Log in
@@ -100,7 +100,7 @@ return to the terminal and press Enter.
 Repeat for every SISU instance you have an account at:
 
 ```bash
-python fetch_transcript.py --domain sisu.aalto.fi
+python tools/fetch_transcript.py --domain sisu.aalto.fi
 ```
 
 Each run merges into a single file at `data/transcript.json`, keyed by
@@ -122,7 +122,7 @@ This is the most important file in the project. Everything downstream
 Spend 10–20 minutes on it.
 
 ```bash
-cp goals.template.md goals.md
+# Edit the existing goals.md — treat it as the structural example
 $EDITOR goals.md       # or open in your IDE
 ```
 
@@ -150,8 +150,8 @@ crisp and well within your subscription budget.
 Discover which faculties / departments / programmes exist at each university:
 
 ```bash
-python filter_courses.py --list-orgs --root hy-university-root-id
-python filter_courses.py --list-orgs --root aalto-university-root-id
+python tools/filter_courses.py --list-orgs --root hy-university-root-id
+python tools/filter_courses.py --list-orgs --root aalto-university-root-id
 ```
 
 Output is a tree: `[descendant-courses | own-courses]  org-id  Name`.
@@ -159,7 +159,7 @@ Output is a tree: `[descendant-courses | own-courses]  org-id  Name`.
 You can search for branches by name:
 
 ```bash
-python filter_courses.py --list-orgs --root hy-university-root-id --search "law|medic|pharm"
+python tools/filter_courses.py --list-orgs --root hy-university-root-id --search "law|medic|pharm"
 ```
 
 Matching nodes get a `*` marker but the tree isn't pruned, so you can see
@@ -168,7 +168,7 @@ context.
 ### Apply filters → `courses_filtered.jsonl`
 
 ```bash
-python filter_courses.py \
+python tools/filter_courses.py \
     --blacklist-org-name "law" "medicine" "pharmacy" "veterinary" \
     --keep-attainment-language en \
     --out data/courses_filtered.jsonl
@@ -219,7 +219,7 @@ Other prompts that work well:
 | *"Why did you score CS-E4500 so low?"* | Re-reads its description and explains. Be wary of subjective scoring — push back. |
 | *"What does CS-E4500 need beforehand?"* | Runs `prereq_graph.py before CS-E4500`, cross-references your transcript and `declared_knowledge.json`. |
 | *"Build me a 4-period plan starting autumn 2025, focused on probabilistic ML."* | Proposes a `schedule.yaml`. Doesn't write to disk until you confirm. |
-| *"Add MS-A0001 to autumn 2025 period I."* | Edits `schedule.yaml`, runs `schedule.py`, reports any violations. |
+| *"Add MS-A0001 to autumn 2025 period I."* | Edits `schedule.yaml`, runs `tools/schedule.py`, reports any violations. |
 | *"Replace the missing prereqs with what I actually know"* | For each `MISSING_PREREQS` warning, asks you whether you have equivalent knowledge from outside SISU. If yes, appends to `data/declared_knowledge.json`. |
 
 **Iterate freely.** Claude isn't authoritative — push back, change goals,
@@ -233,7 +233,7 @@ processing.
 Once you have a `schedule.yaml`:
 
 ```bash
-python schedule.py
+python tools/schedule.py
 ```
 
 This:
@@ -258,12 +258,12 @@ enrolment. But they're still useful as:
 2. A **difficulty signal**: a probability course with "measure theory" listed
    as a prereq is grad-level; the same course with no prereqs is intro-level.
 
-`schedule.py` considers a prerequisite **satisfied** if any one of these
+`tools/schedule.py` considers a prerequisite **satisfied** if any one of these
 three is true:
 
 | Tier | Source | Authored by |
 | --- | --- | --- |
-| 1. Completed in transcript | `data/transcript.json` | `fetch_transcript.py` (auto) |
+| 1. Completed in transcript | `data/transcript.json` | `tools/fetch_transcript.py` (auto) |
 | 2. Scheduled in an earlier period | `schedule.yaml` | You |
 | 3. Declared equivalent knowledge | `data/declared_knowledge.json` | You, after the session asks |
 
@@ -277,7 +277,7 @@ The Claude Code session will ask before adding entries. **Never silently
 infer** — it should always ask whether you have equivalent knowledge before
 treating something as satisfied.
 
-Template at `declared_knowledge.template.json`. Real shape:
+Template at `.claude/declared_knowledge.template.json`. Real shape:
 
 ```json
 {
@@ -299,13 +299,13 @@ validator matches on either.
 
 ## Script reference
 
-### `ingest_catalog.py` — refresh the catalog
+### `tools/ingest_catalog.py` — refresh the catalog
 
 ```bash
-python ingest_catalog.py                              # default: HY + Aalto, current academic year
-python ingest_catalog.py --universities all           # all 9 federated universities
-python ingest_catalog.py --list-universities          # print the known list
-python ingest_catalog.py --staleness-cutoff none      # include older courses
+python tools/ingest_catalog.py                              # default: HY + Aalto, current academic year
+python tools/ingest_catalog.py --universities all           # all 9 federated universities
+python tools/ingest_catalog.py --list-universities          # print the known list
+python tools/ingest_catalog.py --staleness-cutoff none      # include older courses
 ```
 
 Two-phase crawl: enumerates course IDs via `/kori/api/course-unit-search`
@@ -315,11 +315,11 @@ the output JSONL. Federation-aware (one domain query returns courses from
 across all participating universities). Default takes 5–10 minutes for a
 full crawl with HY+Aalto.
 
-### `fetch_transcript.py` — pull your completed courses
+### `tools/fetch_transcript.py` — pull your completed courses
 
 ```bash
-python fetch_transcript.py --domain sisu.helsinki.fi
-python fetch_transcript.py --domain sisu.aalto.fi --out data/transcript.json
+python tools/fetch_transcript.py --domain sisu.helsinki.fi
+python tools/fetch_transcript.py --domain sisu.aalto.fi --out data/transcript.json
 ```
 
 Opens Chromium, you log in via Shibboleth, the script captures the SISU
@@ -327,36 +327,36 @@ SPA's bearer token (by spying on its outbound `/ori/api/*` requests) and
 reuses it to call `/ori/api/my-attainments`. Multi-domain: re-run with a
 different `--domain` and it merges.
 
-### `filter_courses.py` — discover + filter
+### `tools/filter_courses.py` — discover + filter
 
 ```bash
 # Discovery
-python filter_courses.py --list-orgs --root hy-university-root-id --search "law"
+python tools/filter_courses.py --list-orgs --root hy-university-root-id --search "law"
 
 # Filter to a smaller working set
-python filter_courses.py --blacklist-org-name "law" "medicine" \
+python tools/filter_courses.py --blacklist-org-name "law" "medicine" \
     --keep-attainment-language en \
     --out data/courses_filtered.jsonl
 ```
 
-### `prereq_graph.py` — explore the prereq DAG
+### `tools/prereq_graph.py` — explore the prereq DAG
 
 ```bash
-python prereq_graph.py before CS-E4500           # ancestors (what to take first)
-python prereq_graph.py after  CS-A1140           # descendants (what this unlocks)
-python prereq_graph.py chain  CS-E4500           # both directions
-python prereq_graph.py orphans                   # prereqs referenced but not in catalog
-python prereq_graph.py export --format dot       # whole graph, Graphviz-renderable
+python tools/prereq_graph.py before CS-E4500           # ancestors (what to take first)
+python tools/prereq_graph.py after  CS-A1140           # descendants (what this unlocks)
+python tools/prereq_graph.py chain  CS-E4500           # both directions
+python tools/prereq_graph.py orphans                   # prereqs referenced but not in catalog
+python tools/prereq_graph.py export --format dot       # whole graph, Graphviz-renderable
 ```
 
 `[C]` markers are compulsory prereqs (still soft, but more on-paper); `[r]`
 is recommended. "needs ANY OF" headings show OR-groups (alternatives).
 
-### `resolve_orphans.py` — fix dangling prereq refs
+### `tools/resolve_orphans.py` — fix dangling prereq refs
 
 ```bash
-python resolve_orphans.py                        # all orphans
-python resolve_orphans.py --limit 50             # smoke test
+python tools/resolve_orphans.py                        # all orphans
+python tools/resolve_orphans.py --limit 50             # smoke test
 ```
 
 About 600–700 prereqs reference course group IDs not in `courses.jsonl`
@@ -367,26 +367,26 @@ prereq graph:
 
 ```bash
 cat data/courses.jsonl data/courses_extra.jsonl > /tmp/full.jsonl
-python prereq_graph.py --in /tmp/full.jsonl orphans
+python tools/prereq_graph.py --in /tmp/full.jsonl orphans
 ```
 
-### `schedule.py` — validate your plan
+### `tools/schedule.py` — validate your plan
 
 ```bash
-python schedule.py                              # uses schedule.yaml + auto-discovers transcript + declared
-python schedule.py --schedule alt.yaml          # try a different plan file
+python tools/schedule.py                              # uses schedule.yaml + auto-discovers transcript + declared
+python tools/schedule.py --schedule alt.yaml          # try a different plan file
 ```
 
 Errors halt; warnings are informational. `MISSING_PREREQS` is the structured
 list of things the Claude Code session can act on (propose adding the prereq
 to an earlier period, or ask about equivalent knowledge).
 
-### `rank.py` — **OPTIONAL**, requires API balance
+### `tools/rank.py` — **OPTIONAL**, requires API balance
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...
-python rank.py --check-cost-only                # estimate spend
-python rank.py
+python tools/rank.py --check-cost-only                # estimate spend
+python tools/rank.py
 ```
 
 Uses the Anthropic **Batches API** to score every course in
@@ -404,22 +404,22 @@ ranking in-session.
 | `CLAUDE.md` | Project guide loaded by Claude Code on startup. | Maintainer |
 | `INSTRUCTIONS.md` | This file. | Maintainer |
 | `requirements.txt` | Python deps. | Maintainer |
-| `goals.template.md` → `goals.md` | Your study goals, free-form markdown. | **You** |
-| `schedule.template.yaml` → `schedule.yaml` | Period-by-period plan. | **You** (via session) |
-| `declared_knowledge.template.json` → `data/declared_knowledge.json` | Courses you know but didn't take. | **You** (via session prompts) |
-| `data/courses.jsonl` | The catalog. One full course detail per line. | `ingest_catalog.py` |
+| `goals.md` (existing) | Your study goals, free-form markdown. | **You** |
+| `.claude/schedule.template.yaml` → `schedule.yaml` | Period-by-period plan. | **You** (via session) |
+| `.claude/declared_knowledge.template.json` → `data/declared_knowledge.json` | Courses you know but didn't take. | **You** (via session prompts) |
+| `data/courses.jsonl` | The catalog. One full course detail per line. | `tools/ingest_catalog.py` |
 | `data/courses.jsonl.gz` | Compressed shipping copy (~15 MB). | Manual |
-| `data/courses_extra.jsonl` | Orphan-resolved supplementary courses. | `resolve_orphans.py` |
-| `data/courses_filtered.jsonl` | Narrowed candidate pool. | `filter_courses.py` |
-| `data/transcript.json` | Your completed courses per university. | `fetch_transcript.py` |
-| `data/scored_courses.jsonl` | LLM-scored shortlist with reasoning. | Claude Code session or `rank.py` |
-| `data/_orgs.json` | Cached organisation tree. | `filter_courses.py` |
+| `data/courses_extra.jsonl` | Orphan-resolved supplementary courses. | `tools/resolve_orphans.py` |
+| `data/courses_filtered.jsonl` | Narrowed candidate pool. | `tools/filter_courses.py` |
+| `data/transcript.json` | Your completed courses per university. | `tools/fetch_transcript.py` |
+| `data/scored_courses.jsonl` | LLM-scored shortlist with reasoning. | Claude Code session or `tools/rank.py` |
+| `data/_orgs.json` | Cached organisation tree. | `tools/filter_courses.py` |
 
 ---
 
 ## Troubleshooting
 
-### `fetch_transcript.py` returns HTTP 401
+### `tools/fetch_transcript.py` returns HTTP 401
 
 The script needs to capture the SISU SPA's bearer token. That happens
 automatically as long as you wait until the dashboard is *fully loaded*
@@ -435,22 +435,22 @@ If 401 persists:
 3. If still failing, your Shibboleth session may have a path scope issue.
    File a bug; we can dig into the network trace.
 
-### `schedule.py` says "course CODE is not in the catalog"
+### `tools/schedule.py` says "course CODE is not in the catalog"
 
 The code in your `schedule.yaml` doesn't match any code in
 `data/courses.jsonl`. Case matters (it's matched exactly). Re-check the code,
 and if the course is currently offered, confirm it wasn't filtered out by
-`ingest_catalog.py`'s staleness rule (default keeps anything with offerings
+`tools/ingest_catalog.py`'s staleness rule (default keeps anything with offerings
 ending after the current academic year started).
 
-### `schedule.py` warns about an orphan prereq groupId
+### `tools/schedule.py` warns about an orphan prereq groupId
 
-Run `resolve_orphans.py` to fetch missing prereq courses, then concatenate:
+Run `tools/resolve_orphans.py` to fetch missing prereq courses, then concatenate:
 
 ```bash
-python resolve_orphans.py
+python tools/resolve_orphans.py
 cat data/courses.jsonl data/courses_extra.jsonl > /tmp/full.jsonl
-python schedule.py --catalog /tmp/full.jsonl
+python tools/schedule.py --catalog /tmp/full.jsonl
 ```
 
 ### My Claude Code session is burning through Max budget
@@ -460,7 +460,7 @@ than 2000+. Use `--keep-attainment-language en` to drop any course that
 isn't offered in a language you'll attain in, and `--blacklist-org-name` to
 remove whole faculties.
 
-### `rank.py` says my goals don't make sense
+### `tools/rank.py` says my goals don't make sense
 
 It probably read the template placeholders. Make sure `goals.md` has real
 content, not `(write here)` placeholders.
@@ -486,7 +486,7 @@ in the structured fields. Many courses describe prereqs only in free-text
 from the structured side only.
 
 **Q: I'm enrolled at HY *and* Aalto. Does anything break?**
-A: No. Run `fetch_transcript.py` once per SISU and the transcripts merge.
+A: No. Run `tools/fetch_transcript.py` once per SISU and the transcripts merge.
 The catalog is federated so courses from both unis are already in
 `data/courses.jsonl`.
 
