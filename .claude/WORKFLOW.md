@@ -42,9 +42,26 @@ Look for:
 
 ---
 
-## Step 1: Fetch the transcript (per university)
+## Step 1: Fetch the transcript (per university the user listed)
+
+**Read `goals.md` → "Universities I can take courses at" first.** Run
+`fetch_transcript.py` once per SISU instance the user has study right
+at — *not* a hardcoded HY+Aalto list.
+
+University name → SISU domain mapping:
+
+| User says | `--domain` value |
+|---|---|
+| Helsinki / HY / University of Helsinki | `sisu.helsinki.fi` |
+| Aalto / Aalto University | `sisu.aalto.fi` |
+| Tampere / TUNI / Tampere University | `sisu.tuni.fi` |
+| Jyväskylä / JYU / University of Jyväskylä | `sisu.jyu.fi` |
+| LUT / Lappeenranta | `sisu.lut.fi` |
+| Hanken / SHH | `sisu.hanken.fi` |
+| Arcada | `sisu.arcada.fi` |
 
 ```bash
+# example: user lists Helsinki + Aalto
 python tools/fetch_transcript.py --domain sisu.helsinki.fi
 python tools/fetch_transcript.py --domain sisu.aalto.fi
 ```
@@ -154,14 +171,55 @@ cost of carrying genuinely-stale courses is small (you'll skip them at
 recommendation time anyway), and the cost of dropping a course the user
 needs is high (you have to re-ingest later).
 
+### Restrict the crawl to the user's universities
+
+`ingest_catalog.py` defaults to filtering crawl results to HY+Aalto.
+**Override based on goals.md**. The flag is `--universities <root-id>...`.
+Get the canonical root IDs with:
+
 ```bash
-# Main crawl — no staleness filter, full coverage
+python tools/ingest_catalog.py --list-universities
+```
+
+The mapping (current as of 2026):
+
+| User says | `--universities` value |
+|---|---|
+| Helsinki / HY | `hy-university-root-id` |
+| Aalto | `aalto-university-root-id` |
+| Tampere / TUNI | `tuni-university-root-id` |
+| Jyväskylä / JYU | `jyu-university-root-id` |
+| LUT | `lut-university-root-id` |
+| Hanken / SHH | `shh-university-root-id` |
+| Arcada | `arc-university-root-id` |
+
+Pair this with `--domains <sisu-host>...` so the search-side enumeration
+runs against an instance the user can reach (one is enough — federation
+returns courses from every cooperating university anyway). Default
+`--domains sisu.helsinki.fi sisu.aalto.fi`.
+
+```bash
+# Example: user lists Helsinki + Aalto
 python tools/ingest_catalog.py \
   --queries-file .claude/queries_hyaalto.txt \
   --staleness-cutoff none \
+  --universities hy-university-root-id aalto-university-root-id \
+  --domains sisu.helsinki.fi sisu.aalto.fi \
+  --out data/courses.jsonl \
+  --workers 16 --rps 20
+
+# Example: user is at Helsinki + Tampere only
+python tools/ingest_catalog.py \
+  --queries-file .claude/queries_hyaalto.txt \
+  --staleness-cutoff none \
+  --universities hy-university-root-id tuni-university-root-id \
+  --domains sisu.helsinki.fi sisu.tuni.fi \
   --out data/courses.jsonl \
   --workers 16 --rps 20
 ```
+
+If the user names a university you don't recognise, run
+`--list-universities` and match by name. Don't guess the root ID.
 
 If catalog size becomes a problem (>20k entries), tighten to a 2-3 year
 window (`2023-08-01` or similar) — but only after confirming that
@@ -535,13 +593,20 @@ Don't write to `data/` unless explicitly asked. Don't overwrite
 ## Quick command reference
 
 ```bash
-# Fetch transcripts (interactive Playwright login)
+# List the canonical SISU university root IDs (use to build --universities)
+python tools/ingest_catalog.py --list-universities
+
+# Fetch transcripts — one per SISU instance from goals.md "Universities..."
 python tools/fetch_transcript.py --domain sisu.helsinki.fi
 python tools/fetch_transcript.py --domain sisu.aalto.fi
+# (substitute / add domains based on goals.md)
 
-# Crawl catalog with the broad-coverage queries (no staleness filter)
+# Crawl catalog — substitute --universities + --domains for goals.md set
 python tools/ingest_catalog.py --queries-file .claude/queries_hyaalto.txt \
-  --staleness-cutoff none --out data/courses.jsonl \
+  --staleness-cutoff none \
+  --universities hy-university-root-id aalto-university-root-id \
+  --domains sisu.helsinki.fi sisu.aalto.fi \
+  --out data/courses.jsonl \
   --workers 16 --rps 20
 
 # Targeted re-fetch for missing codes
