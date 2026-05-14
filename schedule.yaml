@@ -1,0 +1,81 @@
+# schedule.yaml — period-by-period plan for HY MSc Math + Aalto MSc Finance
+#
+# Conventions:
+#   Periods I/II  = Autumn (Sep–Dec)
+#   Periods III/IV = Spring (Jan–May)
+#   - Aalto codes (FIN-E*, 28E*, 28L*, ELEC-*, CS-E*) are scheduled alongside HY codes;
+#     the validator doesn't care which degree they map to.
+#   - MAST32007 is HY but counted in Aalto vapaasti (cross-registration).
+#   - Past completed courses come from data/transcript.json — not listed here.
+#   - Thesis periods left empty in code list; comment marks the period intent.
+#     (Thesis codes: MAST31000 for HY math; Aalto thesis FIN.thes isn't a real
+#     catalog entry — handled at programme level.)
+
+plan:
+  # ===== Year 1 (2026–2027) — bulk of coursework =====
+
+  "2026-2027/I":   # Autumn period I — start probability + macro pipelines
+    - MAST31701   # Probability theory I (HY) — 5
+    - MAST30170   # Functional Analysis I (HY) — 5; supports Stoch Anal sequence
+    - ECOM-411    # Applied Macroeconometrics 1 (HY MSc Econ) — 5
+    - FIN-E0311   # Advanced Investments (Aalto) — 6
+    - "28L30111"  # Theoretical Asset Pricing D (Aalto, autumn-period-I-only) — 6
+    # subtotal: 27 ECTS
+
+  "2026-2027/II":  # Autumn period II
+    - MAST31702   # Probability theory II — 5; needs MAST31701
+    - ECOM-412    # Applied Macroeconometrics 2 — 5; needs ECOM-411
+    - CS-E4891    # Deep Generative Models (Aalto) — 5; replaces 28E00900 in this slot
+    - MAST32007   # Time series analysis I (HY, cross-reg to Aalto vapaasti) — 5
+    - "28L30211"  # Empirical Asset Pricing (Aalto, autumn-period-II-only; now in elective studies bucket) — 6
+    # subtotal: 26 ECTS
+
+  "2026-2027/III": # Spring period III — start stochastic analysis + macro depth
+    - MAST31706   # Stochastic analysis I (Itô) — 5; needs MAST31702
+    - MAST32006   # High-dimensional statistics — 5
+    - MAST32008   # Time series analysis II (VAR) — 5; needs MAST32007
+    - "ECOM-R318" # Adv Macro 4: HANK — 5
+    - MAT22005    # Bayesian inference (HY) — 5; prereq for MAST32004 in next period
+    # subtotal: 25 ECTS
+
+  "2026-2027/IV":  # Spring period IV
+    - MAST31710   # Stochastic analysis II (SDEs) — 5; needs MAST31706
+    - "ECOM-R319" # Adv Macro 3: Monetary Policy DSGEs — 5
+    - MAST32004   # Advanced Bayesian Inference — 5; needs MAT22005
+    - MAST32001   # Computational statistics — 5
+    - MAT22013    # Statistical inference IIA — 5
+    - MS-C1350    # Partial Differential Equations (Aalto) — 5; supports MAST31710 SDE→PDE bridge
+    # subtotal: 30 ECTS
+
+  # ===== Year 2 (2027–2028) — finish coursework, then Aalto thesis =====
+
+  "2027-2028/I":   # Autumn period I — math finance core + applied + Aalto vapaasti
+    - MAST31908   # Quantitative finance — 5; needs MAST31701/02 (formal prereq)
+    - MAST30142   # Stochastic Methods of Energy Markets — 5
+    - ECOM-434    # Money and Monetary Policy — 5
+    - ELEC-C7241  # Computer Networks (Aalto) — 5
+    - ELEC-E8106  # Bayesian Filtering and Smoothing (Aalto) — 5
+    # subtotal: 25 ECTS
+
+  "2027-2028/II":  # Autumn period II — last Aalto vapaasti pick before thesis
+    - CS-E4825    # Probabilistic Machine Learning (Aalto) — 5
+    # subtotal: 5 ECTS — light on purpose; thesis ramps up
+
+  "2027-2028/III": []  # Aalto thesis writing (FIN.thes 30 ECTS spread across III–IV)
+
+  "2027-2028/IV":  []  # Aalto MSc Finance thesis defence — degree complete
+
+  # ===== Year 3 (2028–2029) — HY thesis only =====
+
+  "2028-2029/I":   []  # HY thesis writing (MAST31000 30 ECTS spread across I–II)
+
+  "2028-2029/II":          # HY MSc Math thesis defence — degree complete
+    - MAST31000   # Master's thesis in Applied Mathematics — 30
+
+constraints:
+  # User's stated load preference: 24–30 ECTS per period. Cap at 30.
+  max_credits_per_period: 30
+
+  # If you ever generate suggestions for empty periods, draw from top-25 of
+  # data/scored_courses.jsonl (currently not generated in this workflow).
+  candidate_pool_top_n: 25

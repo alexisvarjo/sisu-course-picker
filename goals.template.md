@@ -40,6 +40,39 @@ scores. Bullet points are fine; full sentences are better when nuance matters.
 
 (write here)
 
+## Universities I can take courses at
+
+> List the SISU instances you have study rights at. The catalog crawl
+> will be restricted to these, and cross-registration assumptions in
+> the plan will respect them. Examples:
+> - "Helsinki and Aalto" — full Helsinki Capital cross-registration
+> - "Helsinki only — no Aalto study right"
+> - "Aalto only"
+> - "Helsinki + Tampere via Unifi cooperation network"
+> - "Helsinki + Aalto, but cross-registration to Aalto needs case-by-case
+>   approval — assume only obvious wins"
+>
+> Also note any sub-restrictions, e.g. "I'm in HY MSc Math; cross-faculty
+> registration to HY MSc Economics works but I need advisor sign-off."
+
+(write here)
+
+## Faculties / topic areas to exclude entirely
+
+> Used to auto-derive the catalog filter. Be aggressive — the catalog has
+> ~13k courses; everything you don't drop here costs ranking time. Examples:
+> - "All humanities, theology, law, medicine, veterinary, pharmacy,
+>    biology/agriculture, education, arts/design"
+> - "All language courses except possibly one short Finnish course"
+> - "All bachelor-level intro courses on topics I already know"
+> - "All doctoral programmes (I'm an MSc student)"
+>
+> Conversely, list anything you'd otherwise expect to be cut but want
+> kept (e.g., "Keep Faculty of Social Sciences > MSc Economics — I want
+> macro courses from there").
+
+(write here)
+
 ## Practical constraints
 
 > Examples:

@@ -16,39 +16,51 @@ relevant faculties only, doctoral programmes excluded).
 | Code | Course | ECTS | Status |
 |---|---|---|---|
 | FIN-E0311 | Advanced Investments | 6 | selected |
-| 28E00900 | Fixed Income | 6 | selected (see note) |
+| ~~28E00900~~ | ~~Fixed Income~~ | ~~6~~ | **dropped — overlap with MAST31908 + BSc fixed income + FRM Derivatives chain** |
 | 28E34600 | Portfolio Management | 6 | done |
 | 28E35700 | Capstone: Alternative Investments | 6 | done |
 | FIN-E0313 | Advanced Econometrics for Financial Markets | 6 | done |
 | TU-E2211 | Financial Risk Management with Derivatives 1 | 5 | done |
 | 28L30111 | Theoretical Asset Pricing | 6 | selected |
+| 28L30211 | Empirical Asset Pricing | 6 | **moved from vapaasti to elective studies** — replaces 28E00900 in the elective-studies bucket, keeping it at 41 op |
 | FIN.thes | Master's thesis | 30 | — |
 | ~~FIN-E0310~~ | ~~Advances in Financial Technology~~ | ~~6~~ | **swap → networking, see below** |
-| 28L30211 | Empirical Asset Pricing | 6 | selected (vapaasti) |
 | TU-E2221 | Financial Risk Management with Derivatives 2 | 5 | done (vapaasti) |
 | TU-E2231 | Machine Learning in Financial Risk Management | 5 | done (vapaasti) |
-| ELEC-C7241 | Computer Networks | 5 | **replaces FIN-E0310** — packet switching, TCP/IP, routing, performance evaluation. Your one networking course. |
+| ELEC-C7241 | Computer Networks | 5 | **replaces FIN-E0310** in vapaasti — packet switching, TCP/IP, routing, performance evaluation. Your one networking course. |
 
-### Note on Fixed Income (28E00900)
+### Note on dropping 28E00900 Fixed Income
 
-Recommend **keep**. Term-structure modelling is core quant tooling. If swap:
-`31E00910` Applied Microeconometrics I (6 ECTS).
+Substantial overlap with what you already have:
+- **MAST31908 Quantitative finance** (HY): "Mathematical models of interest-rate
+  instruments and derivatives" — covers the math-finance side of fixed income.
+- **BSc fixed income & derivatives module** — practitioner side.
+- **TU-E2211 + TU-E2221** FRM Derivatives 1 & 2 (done) — interest-rate
+  derivatives angle.
+- **MAST31710 Stochastic analysis II** — SDE foundation for term-structure /
+  HJM-type models.
+
+Marginal value of 28E00900 on top of all that is small. Replaced in the
+elective-studies bucket by 28L30211 (moved from vapaasti).
 
 ### Note on the FIN-E0310 / ELEC-C7241 swap
 
-Net –1 ECTS in vapaasti (6 → 5), giving you 1 ECTS of extra room (max 42).
+Net –1 ECTS in vapaasti (6 → 5), giving you 1 ECTS of extra room.
 ELEC-C7241 is the canonical single networking course at Aalto.
 
-### Vapaasti valittavat — 20 ECTS to fill
+### Vapaasti valittavat — 25 ECTS to fill
 
 | Code | Course | ECTS | Why |
 |---|---|---|---|
 | MAST32007 | Time series analysis I (HY, cross-reg) | 5 | ARMA, weak/strong stationarity, model selection, estimation. |
 | ELEC-E8106 | Bayesian Filtering and Smoothing D | 5 | EKF / UKF / particle filters / SMC / MCMC for nonlinear non-Gaussian state-space — toolkit for online estimation and DSGE. |
 | CS-E4825 | Probabilistic Machine Learning D | 5 | Mixture models, EM, Bayesian networks, latent linear models, variational inference. |
-| CS-E4891 | Deep Generative Models D | 5 | Monte Carlo, divergences, VAEs, deep state-space, diffusion, GANs. Concrete generative-modelling toolkit with quant uses (synthetic market data, scenario generation, score-based stochastic-vol). |
+| CS-E4891 | Deep Generative Models D | 5 | Monte Carlo, divergences, VAEs, deep state-space, diffusion, GANs. Concrete generative-modelling toolkit (synthetic market data, scenario generation, score-based stochastic-vol). |
+| MS-C1350 | Partial Differential Equations (Aalto) | 5 | Laplace / heat / wave equations, separation of variables, Fourier techniques. Bachelor-level applied PDE — no ODE-prereq overhead like HY's MAST30172/3. Direct payoff for MAST31710 (SDE → PDE bridge via Itô formula) and MAST31908 (interest-rate models). |
 
-**Aalto vapaasti total: 20 ECTS.**
+**Aalto vapaasti new picks: 25 ECTS.** Combined with locked vapaasti
+(ELEC-C7241 networking + TU-E2221 done + TU-E2231 done = 15) → vapaasti
+total **40 ECTS**, under max 42.
 
 ---
 
@@ -120,6 +132,8 @@ ELEC-C7241 is the canonical single networking course at Aalto.
 
 - **Swapped FIN-E0310 (Advances in Financial Technology, 6) → ELEC-C7241 (Computer Networks, 5)** in Aalto vapaasti — your one networking course.
 - **Considered then rejected CS-E4690 Programming Parallel Supercomputers (Aalto, 5)** — covers MPI / distributed-memory HPC. Real value for HFT/market-making engineering and at-scale Monte Carlo, but the actual HFT toolkit (kernel bypass, FPGAs, lock-free C++, microsecond budgets) isn't taught at Aalto anyway. CS-E4580 (already done) covers the higher-leverage multicore + GPU half. The MPI/HPC mental model can be picked up from a book + weekend project at lower cost than 5 ECTS.
+- **Swapped CS-E4891 Deep Generative Models (Aalto, 5) → MS-C1350 Partial Differential Equations (Aalto, 5)** in vapaasti — Aalto's BSc-level PDE has no ODE-prereq overhead, gives "just enough PDE for applications," and directly supports MAST31710 (SDE→PDE bridge) and MAST31908.
+- **Reversed: re-added CS-E4891** by dropping 28E00900 Fixed Income from elective studies (overlap with MAST31908 + BSc + FRM Derivatives chain), moving 28L30211 from vapaasti to elective studies (keeps elective studies at 41 op), and re-adding CS-E4891 to vapaasti (vapaasti goes 41 → 40 ECTS, still under max).
 - **Dropped MAST31036 + MAST31041 Convex Analysis & Optimization I + II (10 ECTS)** — practical optimization content can be picked up from CVXPY tutorials + Boyd's free EE364A material. Made room for ECOM-434 + MAST30170.
 - **Added ECOM-434 Money and Monetary Policy (5)** — institutional / applied complement to ECOM-R319's DSGE-flavoured monetary policy.
 - **Added MAST30170 Functional Analysis I (5)** — addresses the prereq risk for the Stochastic Analysis sequence in coursework instead of self-study.
@@ -164,4 +178,41 @@ cover for what's missing.
 
 - Cross-faculty for ECOM-* (HY MSc Math student in MSc Economics courses) — confirm advisor approval.
 - Cross-degree credit for MAST32007 in Aalto vapaasti — confirm Aalto programme coordinator.
-- Once locked, write into `schedule.yaml` and run `python schedule.py` for prereq-ordering validation.
+
+## Schedule
+
+Period-by-period plan written to `schedule.yaml` and validated:
+
+```
+2026-2027/I    27 cr  MAST31701, MAST30170, ECOM-411, FIN-E0311, 28L30111
+2026-2027/II   26 cr  MAST31702, ECOM-412, CS-E4891, MAST32007, 28L30211
+2026-2027/III  25 cr  MAST31706, MAST32006, MAST32008, ECOM-R318, MAT22005
+2026-2027/IV   30 cr  MAST31710, ECOM-R319, MAST32004, MAST32001, MAT22013, MS-C1350
+2027-2028/I    25 cr  MAST31908, MAST30142, ECOM-434, ELEC-C7241, ELEC-E8106
+2027-2028/II    5 cr  CS-E4825                                    (light period; thesis ramps up)
+2027-2028/III  thesis (Aalto FIN.thes — handled at programme level)
+2027-2028/IV   thesis defence — Aalto MSc Finance complete
+2028-2029/I    HY thesis writing
+2028-2029/II   30 cr  MAST31000  (HY MSc Math thesis defence)
+```
+
+Period I/II of 2026–2027 are autumn-loaded with the two Aalto Asset
+Pricing courses (28L30111 in I, 28L30211 in II — both autumn-only).
+Spring IV is at the 30-cr ceiling because MS-C1350 lands there to support
+the Stoch Anal II → SDE→PDE bridge. Math-finance chain
+(MAST31701 → 31702 → 31706 → 31710 → 31908) and Bayesian chain
+(MAT22005 → MAST32004) sequence correctly.
+
+`python schedule.py --schedule schedule.yaml --catalog data/courses.jsonl
+--transcript data/transcript.json` reports **plan is consistent, no prereq
+ordering violations**. The math-finance chain (MAST31701 → MAST31702 →
+MAST31706 → MAST31710 → MAST31908) and the macroeconometrics chain
+(ECOM-411 → ECOM-412) sequence correctly across periods.
+
+### Catalog gotcha worth knowing
+
+When you re-crawl the catalog later, `28L30111` and `28L30211` (Aalto
+Theoretical / Empirical Asset Pricing) need `--staleness-cutoff none` to
+survive — they have empty `activityPeriods` in the SISU API response and
+the default staleness filter drops them silently. The current
+`data/courses.jsonl` has them included from a targeted re-fetch.
