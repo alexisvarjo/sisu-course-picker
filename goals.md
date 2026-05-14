@@ -52,6 +52,30 @@ haven't done too much of
 4. time series maths
 5. bayesian probability
 
+## Degree(s) and credit budget
+
+What degrees am I working toward, and how many ECTS can Claude
+actually choose from? Be specific about each degree: total credits,
+what's already locked / done, and how much is still flexible.
+
+- **Aalto MSc Finance** (120 op total). Most of the structure is
+  already selected:
+  - Elective studies: 41 op (4 done, 3 selected — locked).
+  - Thesis: 30 op.
+  - Freely chosen (vapaasti valittavat): max 42 op, currently 21 op
+    locked-in.
+  - **Open for Claude to choose: ~20 op in vapaasti.**
+
+- **HY MSc Mathematics** (120 op total).
+  - Thesis: 30 op (separate from coursework).
+  - Coursework: 90 op available.
+  - Mandatory inside that: Probability Theory I (MAST31701, 5 op) +
+    Probability Theory II (MAST31702, 5 op) = 10 op.
+  - **Open for Claude to choose: 80 op of HY coursework.**
+
+Total flexible across both degrees: ~100 op of new course choices,
+plus 60 op of thesis work.
+
 ## Universities I can take courses at
 
 Aalto + HY (University of Helsinki). Both via active SISU study right.

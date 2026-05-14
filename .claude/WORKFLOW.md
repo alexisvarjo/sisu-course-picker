@@ -10,10 +10,12 @@ validated, period-by-period `schedule.yaml`. Follow steps in order; do
 ## Prerequisites the user must have done before calling you
 
 1. SISU credentials for at least one Finnish university (Helsinki, Aalto, etc.).
-2. `goals.md` filled in (use the existing `goals.md` as the structural example) — be specific about career
-   goal, weak-area topics, hard constraints (ECTS/period, deadlines),
-   **which universities they have study rights at**, and **which
-   faculties / topic areas to exclude**.
+2. `goals.md` filled in (use the existing `goals.md` as the structural
+   example) — be specific about career goal, weak-area topics, hard
+   constraints (ECTS/period, deadlines), **which universities they have
+   study rights at**, **which faculties / topic areas to exclude**, and
+   **the degree(s) + credit budget** (how many ECTS Claude actually has
+   to choose from per degree, what's already locked vs flexible).
 3. (Optional but useful) Access to Anthropic API balance — only needed if
    you want to use `tools/rank.py` for batch scoring ~1000s of courses. The
    in-session Haiku-subagent flow below does not need it.
@@ -482,7 +484,15 @@ the HY/Aalto SISU but are owned by other universities. Verify with
 
 ## Step 5: User iteration
 
-Present the top-30 to the user. Expect rounds of:
+**Before presenting picks, reread the "Degree(s) and credit budget"
+section of `goals.md`.** That tells you how many ECTS the user actually
+has open across each degree (e.g., "Aalto MSc Finance: 20 op vapaasti
+open" + "HY MSc Math: 80 op flexible after 10 op of mandatory courses").
+Match the size of your recommendation to that budget — don't propose
+180 ECTS of courses to a user with 100 ECTS of room. If the budget
+isn't filled in, ask the user before scoring.
+
+Present the top-N (sized to budget) to the user. Expect rounds of:
 
 1. "Drop X, it's redundant with what I already have." — verify against
    transcript + already-locked courses, then remove.

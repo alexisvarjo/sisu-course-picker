@@ -38,10 +38,20 @@ playwright install chromium     # for SISU login
 
 1. **Edit `goals.md`** — be specific. Career, topic priorities, what you
    already know, what you don't want to study, which universities you can
-   register at, and faculties to exclude. The more concrete, the better
-   the plan. The `goals.md` shipped with this repo is a real, filled-in
-   example — read it for structure, then overwrite the content with your
-   own. Don't worry about staying brief: the model reads the whole file.
+   register at, faculties to exclude, and **how many ECTS Claude actually
+   has to choose from** (per degree — Bachelor, Master, joint Bachelor +
+   Master, etc., with what's already locked vs. flexible). The more
+   concrete, the better the plan. The `goals.md` shipped with this repo
+   is a real, filled-in example — read it for structure, then overwrite
+   the content with your own. Don't worry about staying brief: the model
+   reads the whole file.
+
+   Pay special attention to the **Degree(s) and credit budget** section
+   — Claude uses it to know how many courses to recommend total. Without
+   it, you'll get either too many courses ("here's 30 great options" but
+   you only have room for 5) or too few. Specify per degree: total
+   credits, already-done credits, mandatory blocks, and the remaining
+   flexible budget Claude is allowed to fill.
 
 2. **Open Claude Code in this directory**:
    ```
