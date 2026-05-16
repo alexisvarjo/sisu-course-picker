@@ -161,7 +161,11 @@ Concrete consequences applied to the plan (see `course_picks.md`):
 - Stats range extended cheaply: MAST32017 Nonparametric Inference.
 - Drop niche / out-of-scope: MAST30142 (energy/commodities), ELEC-C7241
   (networking — was door 10, outside 1–6).
-- Networking slot reallocated to causal inference (CS-E407524) for doors 2/3/6.
+- Networking slot reallocated to ECOM-G314 Econometrics 1 (HY MSc Econ,
+  cross-registered to Aalto vapaasti) for doors 2/3/6 — IV/GMM/ML
+  cross-sectional microeconometrics. Chosen over a causal-inference Special
+  Course to avoid irregular-scheduling risk; prefer robust catalog courses
+  cross-registered HY→Aalto over Aalto-specific seminar/special courses.
 
 Not changed and why: macroeconometrics core (411+412), one signature macro
 DSGE course (R319), full Bayesian+stats block, both ML courses

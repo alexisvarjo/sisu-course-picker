@@ -27,8 +27,8 @@ relevant faculties only, doctoral programmes excluded).
 | ~~FIN-E0310~~ | ~~Advances in Financial Technology~~ | ~~6~~ | **dropped — see below** |
 | TU-E2221 | Financial Risk Management with Derivatives 2 | 5 | done (vapaasti) |
 | TU-E2231 | Machine Learning in Financial Risk Management | 5 | done (vapaasti) |
-| ~~ELEC-C7241~~ | ~~Computer Networks~~ | ~~5~~ | **dropped (doors 1–6 pass)** — opens no door 1–6; your CS BSc already covers most of it. Replaced by CS-E407524. |
-| CS-E407524 | Special Course in ML/DS/AI D: Causal Inference | 5 | **replaces ELEC-C7241** in vapaasti — Pearl DAGs, do-calculus, counterfactuals. Zero overlap with HY convex-opt; strengthens doors 2/3/6 (factor/alt-data/experimentation). |
+| ~~ELEC-C7241~~ | ~~Computer Networks~~ | ~~5~~ | **dropped (doors 1–6 pass)** — opens no door 1–6; your CS BSc already covers most of it. |
+| ECOM-G314 | Econometrics 1 (HY MSc Econ, cross-reg to Aalto vapaasti) | 5 | **replaces ELEC-C7241** in vapaasti — linear regression deep-dive, **instrumental variables**, heteroskedasticity, **GMM**, ML estimation. Cross-sectional microeconometrics; covers the door-2/3/6 ground the dropped special course would have, complements (low overlap with) the time-series ECOM-411/412. Regularly offered HY course — no Special-Course scheduling risk. |
 
 ### Note on dropping 28E00900 Fixed Income
 
@@ -44,24 +44,30 @@ Substantial overlap with what you already have:
 Marginal value of 28E00900 on top of all that is small. Replaced in the
 elective-studies bucket by 28L30211 (moved from vapaasti).
 
-### Note on the vapaasti networking → causal-inference swap
+### Note on the vapaasti networking → econometrics swap
 
 The doors 1–6 pass de-prioritizes networking entirely (it was door 10 in
 `goals.md`, explicitly outside the 1–6 set). FIN-E0310 was dropped; the slot
-went briefly to ELEC-C7241 (networking) and is now reallocated to **CS-E407524
-Causal Inference**.
+went briefly to ELEC-C7241 (networking), then to a causal-inference Special
+Course, and is now a **regularly-offered HY course cross-registered to the
+Aalto degree: ECOM-G314 Econometrics 1**. This removes the Special-Course
+scheduling risk entirely — ECOM-G314 runs every year (`hy-lv-74/75/76`).
+
+ECOM-G314 covers the door-2/3/6 ground the causal course was meant for
+(cross-sectional inference, instrumental variables, GMM, ML estimation —
+microeconometrics) while being a robust catalog course. Note: a true HY
+"Causal Inference" course exists only as `DATA.STAT.791-03`, which is a
+**Tampere** cooperation-network course (`uta-lvv-*`), excluded by `goals.md`.
 
 Why not an Aalto optimization course in this slot: the HY side already gets the
 full convex-opt sequence (MAST31036 + MAST31041). Aalto's MS-E2122 Nonlinear
 Optimization overlaps heavily with MAST31041 (convex sets, duality, KKT); the
 more differentiated MS-E2160 (Stochastic & Robust Optimization) requires
-MS-E2121/MS-E2122 as a prereq — a two-course chain there's no room for. Causal
-inference is the cleaner non-redundant addition for doors 2/3/6.
+MS-E2121/MS-E2122 as a prereq — a two-course chain there's no room for.
 
-Vapaasti stays at 40 ECTS (ELEC-C7241 –5, CS-E407524 +5), under the 42 cap.
-**Caveat:** CS-E407524 is a *Special Course* (3–5 op) and runs irregularly —
-confirm it's offered in 2027–2028 before locking; fallback is to absorb the
-–5 ECTS as thesis-ramp breathing room (vapaasti → 35, still legal).
+Vapaasti stays at 40 ECTS (ELEC-C7241 –5, ECOM-G314 +5), under the 42 cap.
+This puts **two** HY courses in the Aalto vapaasti bucket (MAST32007 +
+ECOM-G314); both need cross-registration sign-off — see Open issues.
 
 ### Vapaasti valittavat — 25 ECTS to fill
 
@@ -74,8 +80,8 @@ confirm it's offered in 2027–2028 before locking; fallback is to absorb the
 | MS-C1350 | Partial Differential Equations (Aalto) | 5 | Laplace / heat / wave equations, separation of variables, Fourier techniques. Bachelor-level applied PDE — no ODE-prereq overhead like HY's MAST30172/3. Direct payoff for MAST31710 (SDE → PDE bridge via Itô formula) and MAST31908 (interest-rate models). |
 
 **Aalto vapaasti new picks: 25 ECTS.** Combined with locked/swapped vapaasti
-(CS-E407524 causal inference + TU-E2221 done + TU-E2231 done = 15) → vapaasti
-total **40 ECTS**, under max 42.
+(ECOM-G314 econometrics, HY cross-reg + TU-E2221 done + TU-E2231 done = 15) →
+vapaasti total **40 ECTS**, under max 42.
 
 ---
 
@@ -198,7 +204,62 @@ cover for what's missing.
 ## Open issues
 
 - Cross-faculty for ECOM-* (HY MSc Math student in MSc Economics courses) — confirm advisor approval.
-- Cross-degree credit for MAST32007 in Aalto vapaasti — confirm Aalto programme coordinator.
+- Cross-degree credit for MAST32007 (HY Math) in Aalto vapaasti — confirm Aalto programme coordinator.
+- Cross-degree credit for **ECOM-G314 (HY MSc Economics) in Aalto vapaasti** — heavier ask than the Math cross-reg (HY-Econ → Aalto-Finance). Confirm with Aalto coordinator; if denied, fallbacks: count ECOM-G314 toward HY-90 instead (swap an HY-90 course out to vapaasti), or absorb the –5 op (vapaasti → 35, still legal).
+
+## Contingency: substitutes if the ECOM-* courses fall through
+
+The four `ECOM-*` courses (HY MSc Economics) depend on cross-faculty /
+cross-degree approval. Ranked drop-in replacements below — all are
+**regularly-offered** HY/Aalto Maths/Stats/ML courses, none already in the
+plan, each 5 op. Cross-registration risk is noted per row (Aalto-native = no
+approval needed; HY-Math → easier than HY-Econ).
+
+### Replacing ECOM-G314 (Aalto vapaasti — highest cross-reg risk: HY-Econ→Aalto)
+
+Pick one. Prefer an Aalto-native course here — it removes the cross-reg
+problem entirely.
+
+| Sub | Course | Cross-reg | Why it covers the same doors (2/3/5/6) |
+|---|---|---|---|
+| **1st** | MS-E2112 Multivariate Statistical Analysis (Aalto) | none (Aalto-native) | PCA / robust PCA / canonical correlation / discriminant analysis — *directly* factor-model & risk machinery (doors 2/3). Recommends MS-C1620 first. |
+| 2nd | MS-C1620 Statistical Inference (Aalto) | none (Aalto-native) | Estimation, parametric/nonparametric tests, linear regression, ANOVA in R. Clean econometrics-inference substitute, zero approval friction. |
+| 3rd | MAT22006 Generalized Linear Models (HY Math) | HY-Math→Aalto (easier than HY-Econ) | Logistic / log-linear / GLM regression — the applied-regression workhorse ECOM-G314 teaches, minus the economics framing. |
+
+### Replacing ECOM-411 / ECOM-412 (HY-90 — cross-faculty risk: Math→Econ)
+
+Honest note: the *methods* in 411/412 (VAR, state-space, forecasting) are
+**already largely covered** by MAST32007 + MAST32008 (Time Series I/II) +
+ELEC-E8106 (Bayesian filtering). What 411/412 uniquely add is the
+**macro-domain signal for door 1**. If denied, the method gap is small;
+door 1 weakens to "strong time-series generalist". Substitute the 10 op with
+HY-Math courses (no cross-faculty approval needed):
+
+| Course | Adds | Doors |
+|---|---|---|
+| MAT22015 Stochastic Processes (HY Math) | Markov chains/processes beyond MAST31702, applied | 1,2,4 |
+| MAT22014 Statistical Inference IIB (HY Math) | Deeper estimation/testing theory; pairs with MAT22013 | 2,3,5,6 |
+| DATA12001 Advanced Course in Machine Learning (HY) | ML-as-optimization, unsupervised, matrix factorisation | 6 (2,3) |
+| ELEC-E8107 Stochastic Models, Estimation & Control (Aalto) | ML/MAP/LS/MMSE estimation, Kalman, nonlinear state est. — extends ELEC-E8106 | 1,2,4 |
+
+### Replacing ECOM-R319 (HY-90 — the one with no methods substitute)
+
+**There is no Maths/Stats/ML equivalent.** R319's entire value is
+demonstrating macro *theory* depth (monetary-policy DSGEs) — that's the
+door-1 signal, not a method. If cross-faculty is denied:
+
+- Door 1 (systematic macro / rates research) narrows from "theory + methods"
+  to "methods only" — still open, materially weaker.
+- Don't pretend a substitute restores it. Reallocate the 5 op to **strengthen
+  doors 2/3/5/6 instead** — e.g. MS-E2112 (if not already used above) or
+  MAT22006 GLM. Accept the door-1 narrowing as the real cost of losing
+  cross-faculty access; flag it to the user rather than papering over it.
+
+If *all four* ECOM-* fall through (20 op): take MS-E2112 + MS-C1620 +
+MAT22006 + MAT22015 (or DATA12001). Doors 2/3/5/6 stay fully intact and
+arguably strengthen; doors 1/4 (macro/rates) lose their domain edge but the
+stochastic-analysis + math-finance + time-series spine keeps them open as
+"quant generalist", not "macro specialist".
 
 ## Schedule
 
@@ -209,8 +270,7 @@ Period-by-period plan written to `schedule.yaml` and validated:
 2026-2027/II   26 cr  MAST31702, ECOM-412, CS-E4891, MAST32007, 28L30211
 2026-2027/III  25 cr  MAST31706, MAST32006, MAST32008, MAST31036, MAT22005
 2026-2027/IV   30 cr  MAST31710, ECOM-R319, MAST32004, MAST32001, MAT22013, MS-C1350
-2027-2028/I    23 cr  MAST31908, MAST31041, MAST32017, CS-E407524, ELEC-E8106
-                      (CS-E407524 is 3–5 op variable; validator counts min=3)
+2027-2028/I    25 cr  MAST31908, MAST31041, MAST32017, ECOM-G314, ELEC-E8106
 2027-2028/II    5 cr  CS-E4825                                    (light period; thesis ramps up)
 2027-2028/III  thesis (Aalto FIN.thes — handled at programme level)
 2027-2028/IV   thesis defence — Aalto MSc Finance complete

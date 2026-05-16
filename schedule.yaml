@@ -5,7 +5,8 @@
 #   Periods III/IV = Spring (Jan–May)
 #   - Aalto codes (FIN-E*, 28E*, 28L*, ELEC-*, CS-E*) are scheduled alongside HY codes;
 #     the validator doesn't care which degree they map to.
-#   - MAST32007 is HY but counted in Aalto vapaasti (cross-registration).
+#   - MAST32007 (HY Math) and ECOM-G314 (HY Econ) are HY courses counted in
+#     Aalto vapaasti via cross-registration.
 #   - Past completed courses come from data/transcript.json — not listed here.
 #   - Thesis periods left empty in code list; comment marks the period intent.
 #     (Thesis codes: MAST31000 for HY math; Aalto thesis FIN.thes isn't a real
@@ -53,7 +54,7 @@ plan:
     - MAST31908   # Quantitative finance — 5; needs MAST31701/02 (formal prereq)
     - MAST31041   # Convex analysis & optimization II — 5; needs MAST31036 (2026-2027/III)
     - MAST32017   # Nonparametric Inference — 5 (doors 1-6 pass; replaces MAST30142)
-    - CS-E407524  # Causal Inference (Aalto vapaasti) — 5; replaces ELEC-C7241
+    - ECOM-G314   # Econometrics 1 (HY MSc Econ, cross-reg to Aalto vapaasti) — 5; replaces ELEC-C7241
     - ELEC-E8106  # Bayesian Filtering and Smoothing (Aalto) — 5
     # subtotal: 25 ECTS
 
