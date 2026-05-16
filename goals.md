@@ -129,3 +129,42 @@ no constraints except around 24 to 30 ects per period. i want to finish my finan
 ## Anything else the scorer should know
 
 It might pay off to do lots of maths from the msc before doing finance master's thesis. Then my idea is to investigate the same topic or nearby topic in both master's theses: in the university of helsinki one from a more theoretic perspective and in the aalto one more empirical view.
+
+## Door-optimization preference (added 2026-05-16)
+
+Strategy: **broad strong fundamentals now, specialize on the desk.** This is
+the standard junior-hire profile for AQR / Two Sigma / DE Shaw / multi-manager
+pods (Millennium, Citadel, BAM, Point72) and sell-side strats — strong math +
+stats + coding + financial intuition, with the specialty taught in the first
+12–18 months. Score for *optionality across many roles*, not depth in one.
+
+Optimize course picks for doors **1–6**, explicitly de-prioritize **7–8**:
+
+1. Systematic macro / rates research — primary strength
+2. Buy-side research at multi-strat / quant funds
+3. Stat-arb / systematic equity
+4. Fixed income / rates quant (sell side)
+5. Risk quant
+6. Buy-side ML quant / alt data
+7. *(de-prioritized)* HFT — closed by absence of demonstrable C++/low-latency
+   work, not by coursework; not reachable via an EE degree either (HFT hires
+   competitive-programming CS people, not EE PhDs). Out of scope here.
+8. *(de-prioritized)* Exotic derivatives — needs more PDE + a PhD. Out of scope.
+
+Concrete consequences applied to the plan (see `course_picks.md`):
+- Optimization is the highest-value gap (transcript signal beats self-study;
+  hits doors 2/3/5). Convex-opt sequence MAST31036 + MAST31041 added.
+- Macro block trimmed 25 → 15 ECTS: keep the transferable methods core
+  (ECOM-411/412 — SVAR/state-space/DSGE estimation, doors 1–4) + one
+  signature depth course (ECOM-R319). Drop HANK (ECOM-R318) and Money &
+  Monetary Policy (ECOM-434) as too narrow / too institutional for industry.
+- Stats range extended cheaply: MAST32017 Nonparametric Inference.
+- Drop niche / out-of-scope: MAST30142 (energy/commodities), ELEC-C7241
+  (networking — was door 10, outside 1–6).
+- Networking slot reallocated to causal inference (CS-E407524) for doors 2/3/6.
+
+Not changed and why: macroeconometrics core (411+412), one signature macro
+DSGE course (R319), full Bayesian+stats block, both ML courses
+(CS-E4825/E4891), stoch-analysis + math-finance chain
+(MAST31706/31710/31908), Bayesian filtering (ELEC-E8106) — each earns its
+slot for ≥2 of doors 1–6.
