@@ -217,14 +217,14 @@ approval needed; HY-Math → easier than HY-Econ).
 
 ### Replacing ECOM-G314 (Aalto vapaasti — highest cross-reg risk: HY-Econ→Aalto)
 
-Pick one. Prefer an Aalto-native course here — it removes the cross-reg
-problem entirely.
+Pick one. Both are HY-Math courses takeable inside the HY MSc Math and
+cross-registered to Aalto vapaasti (same route as MAST32007) — lower
+cross-reg risk than the HY-Econ→Aalto ask they replace.
 
 | Sub | Course | Cross-reg | Why it covers the same doors (2/3/5/6) |
 |---|---|---|---|
-| **1st** | MS-E2112 Multivariate Statistical Analysis (Aalto) | none (Aalto-native) | PCA / robust PCA / canonical correlation / discriminant analysis — *directly* factor-model & risk machinery (doors 2/3). Recommends MS-C1620 first. |
-| 2nd | MS-C1620 Statistical Inference (Aalto) | none (Aalto-native) | Estimation, parametric/nonparametric tests, linear regression, ANOVA in R. Clean econometrics-inference substitute, zero approval friction. |
-| 3rd | MAT22006 Generalized Linear Models (HY Math) | HY-Math→Aalto (easier than HY-Econ) | Logistic / log-linear / GLM regression — the applied-regression workhorse ECOM-G314 teaches, minus the economics framing. |
+| **1st** | MAST30133 Multivariate analysis (HY Math) | HY-Math→Aalto (easier than HY-Econ) | PCA / factor analysis / canonical correlation / discriminant analysis — *directly* factor-model & risk machinery (doors 2/3). Done inside the HY MSc Math, transfer the credits. |
+| 2nd | MAT22006 Generalized Linear Models (HY Math) | HY-Math→Aalto (easier than HY-Econ) | Logistic / log-linear / GLM regression — the applied-regression workhorse ECOM-G314 teaches, minus the economics framing. |
 
 ### Replacing ECOM-411 / ECOM-412 (HY-90 — cross-faculty risk: Math→Econ)
 
@@ -251,12 +251,12 @@ door-1 signal, not a method. If cross-faculty is denied:
 - Door 1 (systematic macro / rates research) narrows from "theory + methods"
   to "methods only" — still open, materially weaker.
 - Don't pretend a substitute restores it. Reallocate the 5 op to **strengthen
-  doors 2/3/5/6 instead** — e.g. MS-E2112 (if not already used above) or
+  doors 2/3/5/6 instead** — e.g. MAST30133 (if not already used above) or
   MAT22006 GLM. Accept the door-1 narrowing as the real cost of losing
   cross-faculty access; flag it to the user rather than papering over it.
 
-If *all four* ECOM-* fall through (20 op): take MS-E2112 + MS-C1620 +
-MAT22006 + MAT22015 (or DATA12001). Doors 2/3/5/6 stay fully intact and
+If *all four* ECOM-* fall through (20 op): take MAST30133 + MAT22006 +
+MAT22015 + DATA12001. Doors 2/3/5/6 stay fully intact and
 arguably strengthen; doors 1/4 (macro/rates) lose their domain edge but the
 stochastic-analysis + math-finance + time-series spine keeps them open as
 "quant generalist", not "macro specialist".
