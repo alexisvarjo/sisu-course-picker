@@ -1,312 +1,71 @@
 # Course Picks — HY Math MSc + Aalto Finance MSc
 
-Selection rationale anchored in course `content`/`outcomes` (not names).
 Target: quant career with leaning toward quant-macro modelling.
-
-Catalog: `data/courses_filtered.jsonl` (re-crawled with 18-month staleness
-and broadened code-prefix queries; filtered to HY + Aalto only,
-relevant faculties only, doctoral programmes excluded).
+Catalog: `data/courses_filtered.jsonl` (HY + Aalto only).
+Period-by-period schedule: see `schedule.yaml`.
 
 ---
 
-## Aalto MSc Finance
+## Aalto MSc Finance — 120 op
 
-### Locked plan (per current SISU)
+### Programme & elective studies (57 op)
+- FIN-E0311 — Advanced Investments — 6
+- 28E34600 — Portfolio Management — 6 (done)
+- 28E35700 — Capstone: Alternative Investments — 6 (done)
+- FIN-E0313 — Advanced Econometrics for Financial Markets — 6 (done)
+- TU-E2211 — Financial Risk Management with Derivatives 1 — 5 (done)
+- TU-E2221 — Financial Risk Management with Derivatives 2 — 5 (done)
+- TU-E2231 — Machine Learning in Financial Risk Management — 5 (done)
+- 28L30111 — Theoretical Asset Pricing — 6
+- 28L30211 — Empirical Asset Pricing — 6
+- FIN-E0318 — Financial Stability — 6
 
-| Code | Course | ECTS | Status |
-|---|---|---|---|
-| FIN-E0311 | Advanced Investments | 6 | selected |
-| ~~28E00900~~ | ~~Fixed Income~~ | ~~6~~ | **dropped — overlap with MAST31908 + BSc fixed income + FRM Derivatives chain** |
-| 28E34600 | Portfolio Management | 6 | done |
-| 28E35700 | Capstone: Alternative Investments | 6 | done |
-| FIN-E0313 | Advanced Econometrics for Financial Markets | 6 | done |
-| TU-E2211 | Financial Risk Management with Derivatives 1 | 5 | done |
-| 28L30111 | Theoretical Asset Pricing | 6 | selected |
-| 28L30211 | Empirical Asset Pricing | 6 | **moved from vapaasti to elective studies** — replaces 28E00900 in the elective-studies bucket, keeping it at 41 op |
-| FIN.thes | Master's thesis | 30 | — |
-| ~~FIN-E0310~~ | ~~Advances in Financial Technology~~ | ~~6~~ | **dropped — see below** |
-| TU-E2221 | Financial Risk Management with Derivatives 2 | 5 | done (vapaasti) |
-| TU-E2231 | Machine Learning in Financial Risk Management | 5 | done (vapaasti) |
-| ~~ELEC-C7241~~ | ~~Computer Networks~~ | ~~5~~ | **dropped (doors 1–6 pass)** — opens no door 1–6; your CS BSc already covers most of it. |
-| ECOM-G314 | Econometrics 1 (HY MSc Econ, cross-reg to Aalto vapaasti) | 5 | **replaces ELEC-C7241** in vapaasti — linear regression deep-dive, **instrumental variables**, heteroskedasticity, **GMM**, ML estimation. Cross-sectional microeconometrics; covers the door-2/3/6 ground the dropped special course would have, complements (low overlap with) the time-series ECOM-411/412. Regularly offered HY course — no Special-Course scheduling risk. |
+### Vapaasti valittavat (40 op)
+- MAST32007 — Time series analysis I (HY) — 5
+- MAT22006 — Generalized Linear Models (HY) — 5
+- ELEC-E8106 — Bayesian Filtering and Smoothing — 5
+- CS-E4825 — Probabilistic Machine Learning — 5
+- CS-E4890 — Deep Learning — 5
+- CS-E4715 — Supervised Machine Learning — 5
+- ELEC-E8125 — Reinforcement Learning — 5
+- MS-C1350 — Partial Differential Equations — 5
 
-### Note on dropping 28E00900 Fixed Income
-
-Substantial overlap with what you already have:
-- **MAST31908 Quantitative finance** (HY): "Mathematical models of interest-rate
-  instruments and derivatives" — covers the math-finance side of fixed income.
-- **BSc fixed income & derivatives module** — practitioner side.
-- **TU-E2211 + TU-E2221** FRM Derivatives 1 & 2 (done) — interest-rate
-  derivatives angle.
-- **MAST31710 Stochastic analysis II** — SDE foundation for term-structure /
-  HJM-type models.
-
-Marginal value of 28E00900 on top of all that is small. Replaced in the
-elective-studies bucket by 28L30211 (moved from vapaasti).
-
-### Note on the vapaasti networking → econometrics swap
-
-The doors 1–6 pass de-prioritizes networking entirely (it was door 10 in
-`goals.md`, explicitly outside the 1–6 set). FIN-E0310 was dropped; the slot
-went briefly to ELEC-C7241 (networking), then to a causal-inference Special
-Course, and is now a **regularly-offered HY course cross-registered to the
-Aalto degree: ECOM-G314 Econometrics 1**. This removes the Special-Course
-scheduling risk entirely — ECOM-G314 runs every year (`hy-lv-74/75/76`).
-
-ECOM-G314 covers the door-2/3/6 ground the causal course was meant for
-(cross-sectional inference, instrumental variables, GMM, ML estimation —
-microeconometrics) while being a robust catalog course. Note: a true HY
-"Causal Inference" course exists only as `DATA.STAT.791-03`, which is a
-**Tampere** cooperation-network course (`uta-lvv-*`), excluded by `goals.md`.
-
-Why not an Aalto optimization course in this slot: the HY side already gets the
-full convex-opt sequence (MAST31036 + MAST31041). Aalto's MS-E2122 Nonlinear
-Optimization overlaps heavily with MAST31041 (convex sets, duality, KKT); the
-more differentiated MS-E2160 (Stochastic & Robust Optimization) requires
-MS-E2121/MS-E2122 as a prereq — a two-course chain there's no room for.
-
-Vapaasti stays at 40 ECTS (ELEC-C7241 –5, ECOM-G314 +5), under the 42 cap.
-This puts **two** HY courses in the Aalto vapaasti bucket (MAST32007 +
-ECOM-G314); both need cross-registration sign-off — see Open issues.
-
-### Vapaasti valittavat — 25 ECTS to fill
-
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| MAST32007 | Time series analysis I (HY, cross-reg) | 5 | ARMA, weak/strong stationarity, model selection, estimation. |
-| ELEC-E8106 | Bayesian Filtering and Smoothing D | 5 | EKF / UKF / particle filters / SMC / MCMC for nonlinear non-Gaussian state-space — toolkit for online estimation and DSGE. |
-| CS-E4825 | Probabilistic Machine Learning D | 5 | Mixture models, EM, Bayesian networks, latent linear models, variational inference. |
-| CS-E4891 | Deep Generative Models D | 5 | Monte Carlo, divergences, VAEs, deep state-space, diffusion, GANs. Concrete generative-modelling toolkit (synthetic market data, scenario generation, score-based stochastic-vol). |
-| MS-C1350 | Partial Differential Equations (Aalto) | 5 | Laplace / heat / wave equations, separation of variables, Fourier techniques. Bachelor-level applied PDE — no ODE-prereq overhead like HY's MAST30172/3. Direct payoff for MAST31710 (SDE → PDE bridge via Itô formula) and MAST31908 (interest-rate models). |
-
-**Aalto vapaasti new picks: 25 ECTS.** Combined with locked/swapped vapaasti
-(ECOM-G314 econometrics, HY cross-reg + TU-E2221 done + TU-E2231 done = 15) →
-vapaasti total **40 ECTS**, under max 42.
+### Thesis (24 op)
+- FIN-E0599 — Master's thesis seminar — 4
+- Master's thesis (empirical finance) — 20
 
 ---
 
-## HY MSc Mathematics — 90 ECTS
+## HY MSc Mathematics — 120 op
 
-### Mandatory probability — 10 ECTS
+### Probability & stochastic analysis (20 op)
+- MAST31701 — Probability theory I — 5
+- MAST31702 — Probability theory II — 5
+- MAST31706 — Stochastic analysis I — 5
+- MAST31710 — Stochastic analysis II — 5
 
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| MAST31701 | Probability theory I | 5 | Measure-theoretic foundations of probability, independence, LLN, characteristic functions, CLT, Gaussian measures, recurrence/transience of random walks. |
-| MAST31702 | Probability theory II | 5 | Discrete-time Markov chains, Poisson process, conditional expectation, martingales. |
+### Mathematical finance (5 op)
+- MAST31908 — Quantitative finance — 5
 
-### Stochastic analysis (Itô calculus) — 10 ECTS
+### Time series (5 op)
+- MAST32008 — Time series analysis II — 5
 
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| MAST31706 | Stochastic analysis I | 5 | Stochastic integration with respect to martingales and processes with finite variation; continuous martingales and processes with jumps. The Itô calculus course. |
-| MAST31710 | Stochastic analysis II | 5 | Stochastic differential equations and applications. |
+### Optimization (10 op)
+- MAST31036 — Convex analysis and optimization I — 5
+- MAST31041 — Convex analysis and optimization II — 5
 
-### Mathematical finance — 5 ECTS
+### Functional analysis (5 op)
+- MAST30170 — Functional Analysis I — 5
 
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| MAST31908 | Quantitative finance | 5 | Mathematical models of interest-rate instruments and derivatives. |
+### Statistics & Bayesian (40 op)
+- MAT22005 — Bayesian inference — 5
+- MAST32004 — Advanced Bayesian Inference — 5
+- MAT22013 — Statistical inference IIA — 5
+- MAST32001 — Computational statistics — 5
+- MAST32006 — High-dimensional statistics — 5
+- MAST32017 — Nonparametric Inference — 5
+- MAST30133 — Multivariate analysis — 5
+- MAST30161 — Analysis of correlated data — 5
 
-### Time series — 5 ECTS
-
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| MAST32008 | Time series analysis II | 5 | Multivariate VAR; specification, estimation, evaluation, hypothesis testing, forecasting. (TS I is in Aalto vapaasti.) |
-
-### Quant macro (HY MSc Economics, cross-faculty) — 15 ECTS
-
-Shrunk 25 → 15 in the doors 1–6 pass. Kept the methodologically transferable
-core (411 + 412 — SVAR / state-space / DSGE estimation, useful across doors
-1–4) and one signature macro-depth course (R319) so door 1 still reads as
-"theory, not just methods". Dropped ECOM-R318 (HANK — narrowest course for
-industry; appears almost only in central-bank research) and ECOM-434 (Money &
-Monetary Policy — institutional/textbook, no methodological firepower).
-
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| ECOM-411 | Applied Macroeconometrics 1 | 5 | VAR / SVAR foundations + DSGE intro. **MSc-level.** Transfers to factor regime / rates models (doors 1–4). |
-| ECOM-412 | Applied Macroeconometrics 2 | 5 | DSGE empirical implementation, structural VAR depth, validation of DSGE via VAR. |
-| ECOM-R319 | Advanced Macroeconomics 3: Monetary Policy Models | 5 | Monetary-policy DSGEs — the single signature macro-depth course; without it door 1 weakens to "methods, not theory". |
-
-### Optimization — 10 ECTS  *(new in doors 1–6 pass)*
-
-The single biggest gap in the prior plan. Optimization is the one technical
-area where a transcript line reads materially stronger than self-study, and it
-touches doors 2/3/5 directly (portfolio construction, factor-model fitting,
-risk parity, mean-variance under constraints). Replaces the dropped MAST30142
-(Stochastic Methods of Energy Markets — commodities-specific, an exotic
-specialization counter to the broad-optionality goal).
-
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| MAST31036 | Convex analysis and optimization I | 5 | Line-search, 1D Newton/secant, gradient/Newton/conjugate-gradient, Levenberg–Marquardt, least-squares / Kaczmarz, NN applications. The numerical-methods half. |
-| MAST31041 | Convex analysis and optimization II | 5 | Convex sets, separating/supporting hyperplanes, conjugate functions, LP/QP, geometric programming, **Lagrange duality, KKT, sensitivity** — the machinery you'd actually deploy. Needs MAST31036. |
-
-### Math foundations — 5 ECTS
-
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| MAST30170 | Functional Analysis I | 5 | Banach/Hilbert/operators. Directly load-bearing for the Stochastic Analysis sequence (martingales in L^2, operator theory for stochastic integration). Addresses the prereq-risk flag from earlier drafts in coursework rather than self-study. |
-
-### Statistics + Bayesian — 30 ECTS
-
-Extended +5 in the doors 1–6 pass with MAST32017 — cheap range extension
-(rank/sign methods, distribution-free inference) that increases robustness
-across doors 2/3/5/6, especially for alt-data / messy-distribution work.
-
-| Code | Course | ECTS | Why |
-|---|---|---|---|
-| MAT22013 | Statistical inference IIA | 5 | MSc-level estimation/testing theory. |
-| MAST32006 | High-dimensional statistics | 5 | FDR, q-values, penalized regression, variable selection — directly applicable to factor models and risk attribution. |
-| MAST32001 | Computational statistics | 5 | Numerical methods, density estimation, MC, MCMC, approximate Bayesian inference. |
-| MAT22005 | Bayesian inference | 5 | Posteriors, multiparameter models, R + Stan workflow. |
-| MAST32004 | Advanced Bayesian Inference | 5 | Marginal likelihood, decision theory, model comparison, CV / info criteria. Underpins DSGE-style model comparison (doors 1, 6). |
-| MAST32017 | Nonparametric Inference | 5 | Sign/rank estimates, Hodges–Lehmann, distribution-free CIs/tests, nonparametric ANOVA alternatives. Robustness layer for doors 2/3/5/6. |
-
-**HY total: 10 + 10 + 5 + 5 + 15 + 10 + 5 + 30 = 90 ECTS.** ✓
-(prob 10 · stoch 10 · math-fin 5 · TS 5 · macro 15 · optimization 10 ·
-math-foundations 5 · stats+Bayesian 30)
-
----
-
-## Sequencing notes
-
-- **MAST31701 → MAST31702** must come early; everything stochastic depends on them.
-- **MAST31702 → MAST31706 → MAST31710** — stochastic analysis sequence after Probability Theory II.
-- **MAT22005 → MAST32004 → MAST32001** — Bayesian basics → advanced → computational.
-- **MAT22013 → MAST32006** — classical inference before high-dim.
-- **ECOM-411 → ECOM-412** — Applied Macroeconometrics 1 is prereq for 2.
-- **ECOM-R319** — Advanced Macro courses typically run alternating years; check schedule.
-- **MAST31036 → MAST31041** — convex optimization I before II (formal sequence prereq).
-- **MAST31908** — usable after Probability Theory II + a bit of Stochastic Analysis I.
-
-## Risk flag (largely addressed)
-
-The Stochastic Analysis sequence (MAST31706 / MAST31710) leans on
-functional-analytic machinery (L^2 martingales, operator theory). MAST30170
-(Functional Analysis I) is now in the plan to cover this. Real Analysis +
-Fourier (MAST30132) is *not* — characteristic functions and Fourier
-material from Probability Theory I + the L^p material from FA I should
-suffice. If MAST31706 still feels rough mid-course, self-studying Folland
-or Kreyszig chapters on L^p spaces and Sobolev embeddings is the lighter
-cover for what's missing.
-
-## Alternates / swap pool
-
-| Code | Course | ECTS | When you'd add it |
-|---|---|---|---|
-| MAST30132 | Real and Fourier Analysis | 5 | Add only if FA I + Probability Theory I together don't feel like enough analysis foundation for the stochastic analysis sequence. |
-| ECOM-R318 | Adv Macro 4: Heterogeneous Agent Models | 5 | Dropped (doors 1–6 pass). Re-add only for a central-bank-research lean (door 7-ish), which this pass de-prioritizes. |
-| ECOM-434 | Money and Monetary Policy | 5 | Dropped. Institutional/textbook; if needed later, Walsh or Galí over a weekend covers the relevant parts. |
-| MAST30142 | Stochastic Methods of Energy Markets | 5 | Dropped. Re-add only for a real CTA/energy/commodities seat interest. |
-| MS-E2160 | Stochastic Programming & Robust Optimization (Aalto) | 5 | Robust portfolio optimization. Needs MS-E2121/MS-E2122 first — only worth it if you add the Aalto opt chain. |
-
-## Open issues
-
-- Cross-faculty for ECOM-* (HY MSc Math student in MSc Economics courses) — confirm advisor approval.
-- Cross-degree credit for MAST32007 (HY Math) in Aalto vapaasti — confirm Aalto programme coordinator.
-- Cross-degree credit for **ECOM-G314 (HY MSc Economics) in Aalto vapaasti** — heavier ask than the Math cross-reg (HY-Econ → Aalto-Finance). Confirm with Aalto coordinator; if denied, fallbacks: count ECOM-G314 toward HY-90 instead (swap an HY-90 course out to vapaasti), or absorb the –5 op (vapaasti → 35, still legal).
-
-## Contingency: substitutes if the ECOM-* courses fall through
-
-The four `ECOM-*` courses (HY MSc Economics) depend on cross-faculty /
-cross-degree approval. Ranked drop-in replacements below — all are
-**regularly-offered** HY/Aalto Maths/Stats/ML courses, none already in the
-plan, each 5 op. Cross-registration risk is noted per row (Aalto-native = no
-approval needed; HY-Math → easier than HY-Econ).
-
-### Replacing ECOM-G314 (Aalto vapaasti — highest cross-reg risk: HY-Econ→Aalto)
-
-Pick one. Both are HY-Math courses takeable inside the HY MSc Math and
-cross-registered to Aalto vapaasti (same route as MAST32007) — lower
-cross-reg risk than the HY-Econ→Aalto ask they replace.
-
-| Sub | Course | Cross-reg | Why it covers the same doors (2/3/5/6) |
-|---|---|---|---|
-| **1st** | MAST30133 Multivariate analysis (HY Math) | HY-Math→Aalto (easier than HY-Econ) | PCA / factor analysis / canonical correlation / discriminant analysis — *directly* factor-model & risk machinery (doors 2/3). Done inside the HY MSc Math, transfer the credits. |
-| 2nd | MAT22006 Generalized Linear Models (HY Math) | HY-Math→Aalto (easier than HY-Econ) | Logistic / log-linear / GLM regression — the applied-regression workhorse ECOM-G314 teaches, minus the economics framing. |
-
-### Replacing ECOM-411 / ECOM-412 (HY-90 — cross-faculty risk: Math→Econ)
-
-Honest note: the *methods* in 411/412 (VAR, state-space, forecasting) are
-**already largely covered** by MAST32007 + MAST32008 (Time Series I/II) +
-ELEC-E8106 (Bayesian filtering). What 411/412 uniquely add is the
-**macro-domain signal for door 1**. If denied, the method gap is small;
-door 1 weakens to "strong time-series generalist". Substitute the 10 op with
-HY-Math courses (no cross-faculty approval needed):
-
-| Course | Adds | Doors |
-|---|---|---|
-| MAT22015 Stochastic Processes (HY Math) | Markov chains/processes beyond MAST31702, applied | 1,2,4 |
-| MAT22014 Statistical Inference IIB (HY Math) | Deeper estimation/testing theory; pairs with MAT22013 | 2,3,5,6 |
-| DATA12001 Advanced Course in Machine Learning (HY) | ML-as-optimization, unsupervised, matrix factorisation | 6 (2,3) |
-| ELEC-E8107 Stochastic Models, Estimation & Control (Aalto) | ML/MAP/LS/MMSE estimation, Kalman, nonlinear state est. — extends ELEC-E8106 | 1,2,4 |
-
-### Replacing ECOM-R319 (HY-90 — the one with no methods substitute)
-
-**There is no Maths/Stats/ML equivalent.** R319's entire value is
-demonstrating macro *theory* depth (monetary-policy DSGEs) — that's the
-door-1 signal, not a method. If cross-faculty is denied:
-
-- Door 1 (systematic macro / rates research) narrows from "theory + methods"
-  to "methods only" — still open, materially weaker.
-- Don't pretend a substitute restores it. Reallocate the 5 op to **strengthen
-  doors 2/3/5/6 instead** — e.g. MAST30133 (if not already used above) or
-  MAT22006 GLM. Accept the door-1 narrowing as the real cost of losing
-  cross-faculty access; flag it to the user rather than papering over it.
-
-If *all four* ECOM-* fall through (20 op): take MAST30133 + MAT22006 +
-MAT22015 + DATA12001. Doors 2/3/5/6 stay fully intact and
-arguably strengthen; doors 1/4 (macro/rates) lose their domain edge but the
-stochastic-analysis + math-finance + time-series spine keeps them open as
-"quant generalist", not "macro specialist".
-
-## Schedule
-
-Period-by-period plan written to `schedule.yaml` and validated:
-
-```
-2026-2027/I    27 cr  MAST31701, MAST30170, ECOM-411, FIN-E0311, 28L30111
-2026-2027/II   26 cr  MAST31702, ECOM-412, CS-E4891, MAST32007, 28L30211
-2026-2027/III  25 cr  MAST31706, MAST32006, MAST32008, MAST31036, MAT22005
-2026-2027/IV   30 cr  MAST31710, ECOM-R319, MAST32004, MAST32001, MAT22013, MS-C1350
-2027-2028/I    25 cr  MAST31908, MAST31041, MAST32017, ECOM-G314, ELEC-E8106
-2027-2028/II    5 cr  CS-E4825                                    (light period; thesis ramps up)
-2027-2028/III  thesis (Aalto FIN.thes — handled at programme level)
-2027-2028/IV   thesis defence — Aalto MSc Finance complete
-2028-2029/I    HY thesis writing
-2028-2029/II   30 cr  MAST31000  (HY MSc Math thesis defence)
-```
-
-Period I/II of 2026–2027 are autumn-loaded with the two Aalto Asset
-Pricing courses (28L30111 in I, 28L30211 in II — both autumn-only).
-Spring IV is at the 30-cr ceiling because MS-C1350 lands there to support
-the Stoch Anal II → SDE→PDE bridge. Math-finance chain
-(MAST31701 → 31702 → 31706 → 31710 → 31908) and Bayesian chain
-(MAT22005 → MAST32004) sequence correctly.
-
-**Convex-opt placement (doors 1–6 pass):** MAST31036 takes the slot
-ECOM-R318 vacated in 2026-2027/III; MAST31041 lands in 2027-2028/I (after
-31036 — sequence prereq satisfied). The earlier-draft ask was "both before
-period IV of 2026–2027"; that's infeasible without breaching the 30-cr cap
-(periods I/II/IV of 2026–2027 are already at 27/26/30). 2027-2028/I is still
-before any thesis period (earliest is Aalto FIN.thes in 2027-2028/III), so
-the "apply the optimization machinery in the thesis if relevant" rationale
-still holds. **Verification still owed:** confirm MAST31036/31041 actually
-run in those terms against the live SISU teaching calendar — the catalog
-carries validity periods only (`activityPeriods` is null), so this can't be
-checked from `data/`.
-
-`python schedule.py --schedule schedule.yaml --catalog data/courses.jsonl
---transcript data/transcript.json` reports **plan is consistent, no prereq
-ordering violations**. The math-finance chain (MAST31701 → MAST31702 →
-MAST31706 → MAST31710 → MAST31908) and the macroeconometrics chain
-(ECOM-411 → ECOM-412) sequence correctly across periods.
-
-### Catalog gotcha worth knowing
-
-When you re-crawl the catalog later, `28L30111` and `28L30211` (Aalto
-Theoretical / Empirical Asset Pricing) need `--staleness-cutoff none` to
-survive — they have empty `activityPeriods` in the SISU API response and
-the default staleness filter drops them silently. The current
-`data/courses.jsonl` has them included from a targeted re-fetch.
+### Thesis (30 op)
+- MAST31000 — Master's thesis (Applied Mathematics) — 30

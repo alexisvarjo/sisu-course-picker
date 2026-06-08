@@ -173,6 +173,28 @@ def total_credits(codes, by_code):
                for c in codes)
 
 
+def period_count_map(plan):
+    """How many periods each course code appears in. A multi-period (spanning)
+    course is intentionally listed in EVERY period it runs — e.g. an Aalto
+    III-IV course occupies both III and IV, so it appears in both lists."""
+    counts = defaultdict(int)
+    for codes in plan.values():
+        for c in codes:
+            counts[c] += 1
+    return counts
+
+
+def period_load(codes, by_code, pcount):
+    """Credit load a period carries, splitting a multi-period course's credits
+    evenly across the periods it spans (a 5-op I-II course counts 2.5 in each
+    of I and II, not 5 in both)."""
+    total = 0.0
+    for c in codes:
+        cr = ((by_code.get(c) or {}).get("credits") or {}).get("min") or 0
+        total += cr / (pcount.get(c, 1) or 1)
+    return total
+
+
 def parse_period_year(key):
     """Return the academic-year start integer for sorting. E.g. '2025-2026/II' -> 2025."""
     try:
@@ -200,7 +222,9 @@ def validate(plan, by_code, by_group, prereq_idx, c2g, max_credits,
     # consistent).
     period_keys = sorted(plan.keys())
     # Where each scheduled course-group is placed
-    course_at_period = {}  # group_id -> period_key
+    course_at_period = {}  # group_id -> completion (last) period_key
+    pos = {pk: i for i, pk in enumerate(period_keys)}
+    code_periods = defaultdict(list)  # code -> [period_keys it occupies]
     for pk in period_keys:
         for code in plan[pk]:
             if code not in by_code:
@@ -210,18 +234,30 @@ def validate(plan, by_code, by_group, prereq_idx, c2g, max_credits,
             if not gid:
                 warnings.append(f"  [{pk}] {code} has no groupId (rare)")
                 continue
-            if gid in course_at_period:
-                warnings.append(
-                    f"  [{pk}] {code} also appears in {course_at_period[gid]}")
+            code_periods[code].append(pk)
+            # A multi-period course completes in its LAST period; later periods
+            # overwrite because period_keys is in ascending time order. This is
+            # what dependents must come after.
             course_at_period[gid] = pk
 
-    # Credits per period
-    if max_credits:
-        for pk in period_keys:
-            total = total_credits(plan[pk], by_code)
-            if total > max_credits:
+    # A course listed in several periods is a multi-period (spanning) course;
+    # those periods must be contiguous — non-adjacent repeats are likely a typo.
+    for code, pks in code_periods.items():
+        if len(pks) > 1:
+            idxs = sorted(pos[p] for p in pks)
+            if any(idxs[i + 1] - idxs[i] != 1 for i in range(len(idxs) - 1)):
                 warnings.append(
-                    f"  [{pk}] total credits {total} exceeds cap {max_credits}")
+                    f"  {code} appears in non-adjacent periods {pks} — a "
+                    f"multi-period course must occupy contiguous periods")
+
+    # Credit load per period (multi-period courses split across their span)
+    if max_credits:
+        pcount = period_count_map(plan)
+        for pk in period_keys:
+            load = period_load(plan[pk], by_code, pcount)
+            if load > max_credits:
+                warnings.append(
+                    f"  [{pk}] period load {load:g} exceeds cap {max_credits}")
 
     # Prereq ordering — satisfied if alt is in transcript OR scheduled earlier
     for pk in period_keys:
@@ -391,13 +427,17 @@ def main():
 
     # Per-period credit summary
     print("\nPlan summary:")
+    pcount = period_count_map(plan)
     for pk in sorted(plan.keys()):
         cs = plan[pk]
-        cr = total_credits(cs, by_code)
         if not cs:
             print(f"  {pk:<20} (open)")
-        else:
-            print(f"  {pk:<20} {len(cs)} courses, {cr} cr: {', '.join(cs)}")
+            continue
+        load = period_load(cs, by_code, pcount)
+        labelled = [f"{c}*" if pcount.get(c, 1) > 1 else c for c in cs]
+        print(f"  {pk:<20} {len(cs)} courses, {load:g} cr (split): "
+              f"{', '.join(labelled)}")
+    print("  (* = multi-period course; credits split across the periods it spans)")
 
     # Missing-prereq summary — surface what the Claude Code session should act on
     if missing_prereqs:
