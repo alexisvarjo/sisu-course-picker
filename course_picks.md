@@ -28,7 +28,7 @@ Period-by-period schedule: see `schedule.yaml`.
 - CS-E4890 — Deep Learning — 5
 - CS-E4715 — Supervised Machine Learning — 5
 - ELEC-E8125 — Reinforcement Learning — 5
-- MS-C1350 — Partial Differential Equations — 5
+- CS-E4891 — Deep Generative Models — 5
 
 ### Thesis (24 op)
 - FIN-E0599 — Master's thesis seminar — 4
@@ -57,7 +57,7 @@ Period-by-period schedule: see `schedule.yaml`.
 ### Functional analysis (5 op)
 - MAST30170 — Functional Analysis I — 5
 
-### Statistics & Bayesian (40 op)
+### Statistics & Bayesian (35 op)
 - MAT22005 — Bayesian inference — 5
 - MAST32004 — Advanced Bayesian Inference — 5
 - MAT22013 — Statistical inference IIA — 5
@@ -65,7 +65,23 @@ Period-by-period schedule: see `schedule.yaml`.
 - MAST32006 — High-dimensional statistics — 5
 - MAST32017 — Nonparametric Inference — 5
 - MAST30133 — Multivariate analysis — 5
-- MAST30161 — Analysis of correlated data — 5
+
+### Numerical methods (5 op)
+- MS-E1651 — Numerical Matrix Computations (Aalto, cross-registered) — 5
+
+### Causal inference (3 op)
+- CS-E407524 — Special Course: Causal Inference (Aalto, cross-registered; 3 op of 3–5; Special Course, offering-dependent) — 3
 
 ### Thesis (30 op)
 - MAST31000 — Master's thesis (Applied Mathematics) — 30
+
+---
+
+## Research project (contingent — dossier-building, added 2026-06-13)
+- CS-E4875 / CS-E4876 — Research Project in ML/DS/AI (Aalto; 5–10 op, take ~5) —
+  self-arranged supervised project. **Contingent on:** (a) contacting the
+  teacher for permission (non-CS major), (b) a version running in 2026–28
+  (catalog data only reaches 2025-2026; 4875/4876 alternate years). Treat as
+  flexible/extra credit — its value is supervised research + a recommendation
+  letter for the ML-PhD option, not degree credit. Intended as the empirical
+  engine for the diffusion thesis. Penciled into 2027-2028/II in schedule.yaml.

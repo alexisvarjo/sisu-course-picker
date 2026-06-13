@@ -29,18 +29,19 @@ plan:
     - MAST32004
     - MAST31710
     - MAST31041
-    - MAST30161
+    - CS-E4891          # IV-V (also runs in V)
     - CS-E4825          # III-IV, 2nd period
     - ELEC-E8106        # III-IV, 2nd period
     - CS-E4890          # III-IV, 2nd period
 
-  "2026-2027/V": []
-    # Aalto-only period (HY has no period V); no course currently runs here.
+  "2026-2027/V":        # spring V (Aalto-only; HY has no period V)
+    - CS-E4891          # IV-V, 2nd period
 
   "2027-2028/I":        # autumn I
     - MAST32001
     - MAST30133
-    - MS-C1350          # I-II (also runs in II)
+    - MS-E1651
+    - CS-E407524        # Causal Inference (3 op); Special Course, offering-dependent
     - CS-E4715          # I-II (also runs in II)
     - ELEC-E8125        # I-II (also runs in II)
 
@@ -49,7 +50,7 @@ plan:
     - MAST32006
     - FIN-E0318
     - MAST31908
-    - MS-C1350          # I-II, 2nd period
+    - CS-E4875          # Research Project ~5 op; CONTINGENT (teacher permission + offering); or CS-E4876
     - CS-E4715          # I-II, 2nd period
     - ELEC-E8125        # I-II, 2nd period
 

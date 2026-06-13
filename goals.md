@@ -11,6 +11,10 @@ scores. Bullet points are fine; full sentences are better when nuance matters.
 > "ML research scientist at a deep-tech startup, focus on probabilistic
 > programming" rather than "tech".
 
+> **UPDATE 2026-06-13:** Direction resolved — **ML is the spine** (see
+> "Career direction resolved" at the end of this file). The paragraphs below
+> are the original, pre-resolution statement, kept for context.
+
 I want to work in quantitative finance, unsure what career path. I am interested in quantitatively modelling something, like macro related stuff would be cool to try and model or work on. Anything a hedge fund does is interesting to me, anything in consulting / investment banking is not. There are multiple paths in the quant world, like at a market maker, quant dev or quant research etc.
 
 Macro quant work would be one that is really interesting to me and i could specialize in.
@@ -132,6 +136,11 @@ It might pay off to do lots of maths from the msc before doing finance master's 
 
 ## Door-optimization preference (added 2026-05-16)
 
+> **Superseded 2026-06-13** — see "Career direction resolved" below. The
+> macro-primary framing in this section is no longer the plan (ML is now the
+> spine; the macro/econometrics block was considered and rejected). Retained
+> for history.
+
 Strategy: **broad strong fundamentals now, specialize on the desk.** This is
 the standard junior-hire profile for AQR / Two Sigma / DE Shaw / multi-manager
 pods (Millennium, Citadel, BAM, Point72) and sell-side strats — strong math +
@@ -172,3 +181,82 @@ DSGE course (R319), full Bayesian+stats block, both ML courses
 (CS-E4825/E4891), stoch-analysis + math-finance chain
 (MAST31706/31710/31908), Bayesian filtering (ELEC-E8106) — each earns its
 slot for ≥2 of doors 1–6.
+
+## Career direction resolved (added 2026-06-13)
+
+After a long working session the open "which quant path" question is settled.
+Recording the decision and its reasoning so future course picks stay coherent.
+
+**Decision: ML is the spine.** The career identity is *mathematically
+rigorous, systems-capable, finance-domain machine learning* — combining the
+three existing strengths (maths, CS/low-level systems, finance) rather than
+splitting them. Not a quant-macro identity.
+
+**Macro dropped as a career target (kept only as a possible application
+domain).** Reasoning: systematic-macro seats are few and ultra-competitive;
+the strongest candidates pair a full economics degree with maths+stats, and a
+~15–20-credit econometrics tilt buys no competitive *depth* — it only dilutes
+the ML optimization ("don't run a swimming race with one leg trained for
+running"). Discretionary macro prefers economists/ex-central-bankers outright.
+The earlier ECOM macro-econometrics block (ECOM-411/412/R319/G314) is therefore
+NOT being added. Macro may still appear as a *data domain* for ML
+(macro/cross-asset signals), but it is not the specialization.
+
+**Surviving career brackets (post-elimination), read through the ML lens:**
+stat-arb / systematic equity, buy-side ML / alt-data, rates/FICC (quant-gated,
+macro-adjacent), risk / model-validation (AI-durable, MSc-accessible),
+portfolio construction (usually a component, not a standalone career).
+Eliminated: HFT / market-making (EE/competitive-CS territory), derivatives /
+exotics (no measure-theoretic PDE chain; would need a PhD).
+
+**PhD stance:**
+- Maths/stats PhD — **no.**
+- Physics / other STEM PhD — **no.**
+- ML PhD — **maybe, and the one with genuine pull.** Maths is a strong base for
+  theory-leaning ML (learning theory, probabilistic/Bayesian DL, optimization,
+  diffusion/SDEs). Decision deferred; the plan is built to keep this door open.
+- Finance PhD — **maybe, only a very mathematical topic** (asset-pricing /
+  continuous-time); real self-doubt about fit. Lower priority than ML.
+
+**The systems moat is the key differentiator.** Maths + low-level (CUDA/C/
+hardware from the CS BSc; CS-E4580 Programming Parallel Computers already
+completed) is rare — most ML researchers from a maths background can't write
+fast kernels, and most systems people lack the maths. This points at
+ML-systems / infra / performance engineering, which is largely
+*engineering-gated, not PhD-gated* — the strongest no-PhD lane.
+
+**Not cooked without a PhD.** A PhD gates only the elite "Research Scientist /
+Quant Researcher" titles. Open at MSc level with this profile: ML engineering,
+ML systems/infra (advantaged lane), quant dev, risk ML, and fintech / founding
+a company (the long-run goal needs no PhD). The double-MSc + two ML-tailored
+theses is a strong hedge that also keeps the PhD applyable later.
+
+**10-year horizon.** ML is domain-portable; open to switching to an entirely
+different domain later (any field with a hard modelling problem + empirical
+data), with finance as the launch domain.
+
+**Thesis strategy (both degrees, one theme, three lenses)** — build an
+ML-research dossier:
+- HY maths thesis → ML *theory* (recommended: reverse-time SDEs / score-based
+  diffusion models — leverages Stochastic Analysis I/II).
+- Aalto finance thesis → *empirical/applied* ML in finance (e.g., diffusion
+  models for synthetic market data; or the BSc expected-returns question done
+  properly with data this time).
+- Independent project → a GPU-accelerated implementation (custom CUDA/Triton)
+  that doubles as a portfolio artifact and flexes the systems moat.
+- Recommended triangulation theme: **deep generative / diffusion models.**
+
+**Course-plan consequences (applied 2026-06-13; see course_picks.md /
+schedule.yaml):**
+- Dropped MS-C1350 (PDE) — orphaned by closing the derivatives door.
+- Dropped MAST30161 (Analysis of correlated data) — lowest ML leverage of the
+  stats block.
+- Added CS-E4891 (Deep Generative Models) — diffusion-thesis engine (26-27 IV-V).
+- Added MS-E1651 (Numerical Matrix Computations, Aalto→HY cross-reg) — the ML
+  numerical-linear-algebra engine; fills the long-standing numerical-methods
+  gap (27-28 I).
+- Added CS-E407524 (Causal Inference, 3 op, cross-reg) — fills the
+  causal-methods gap in an otherwise prediction-only toolkit.
+- Considered, not added: another parallel/distributed course (CS-E4580 already
+  done); CS-E4875 Research Project (CS-major eligibility + full-Aalto-degree
+  frictions — pursue its value via supervised thesis/independent project).
