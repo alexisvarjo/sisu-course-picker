@@ -2,33 +2,47 @@ plan:
   # Multi-period Aalto courses are listed in EVERY period they run (a III-IV /
   # IV-V / I-II course occupies BOTH periods). The validator splits their
   # credits across those periods, so a 5-op span course counts 2.5 cr per period.
+  #
+  # REMAP 2026-08-04 — HY switched to the statistics track (MAST320-STAT) under
+  # the new 2026-27 teaching plan:
+  #   - MAST31701/31702 (Probability theory I+II) discontinued -> MAST31051.
+  #   - Stochastics moved to autumn: MAST31706 now period I, MAST31710 period II.
+  #   - MAT22005 is period III (was scheduled in II).
+  #   - No 2026-27 offering exists for: MAST31036/41, MAST32008, MAST30133,
+  #     MAST31908, MAST32006 -> all shifted to 2027-28.
+  #   - MAST32007 + MAST32008 count in BOTH degrees: they substitute Aalto's
+  #     MS-C2128 (teacher-approved; both required, TS I alone rejected) AND are
+  #     included in the HY degree's recommended-stats bucket. Intended overlap.
+  # Stochastics chain per the new plan's stated prereqs (fixed 2026-08-04):
+  # MAST30101 (measure) -> MAST31051 (+MAST31052) -> MAST31706 -> MAST31710.
+  # Year 1 = foundations (30101, 31051), year 2 = stoch analysis (31706, 31710).
+  # MAST30101 is TAKEN but sits OUTSIDE the 120-op counted SISU plan (cap).
 
-  "2026-2027/I":        # autumn I
+  "2026-2027/I":        # autumn I  (~27 op)
     - FIN-E0311
     - "28L30111"
-    - MAST31701
     - MAST30170
-    - MAT22006
+    - MAST30101         # Measure and integral (period I) -- prereq for 31051; chain start
+    - MAT22006          # counts at Aalto (vapaasti, opintoluonnos "Yleistetyt lineaariset mallit")
 
-  "2026-2027/II":       # autumn II
-    - "28L30211"
-    - MAT22005
-    - MAST32007
+  "2026-2027/II":       # autumn II  (~26 op)
+    - "28L30211"        # new-curriculum name "Empirical Asset Pricing D"; code may differ
+    - MAST32007         # biennial (2026-27, 2028-29) -> now or never; counts at AALTO
     - MAT22013
-    - MAST31702
+    - MAST31051         # NEW: Measure, probability, and real analysis (replaces 31701+31702)
+    - FIN-E0318         # moved earlier (deadline-bound Aalto course); VERIFY 26-27 offering
+                        # at enrolment -- if not offered, it returns to 27-28/II
 
-  "2026-2027/III":      # spring III
-    - MAST32008
-    - MAST31706
-    - MAST31036
+  "2026-2027/III":      # spring III (~17.5 op)
+    - MAT22005          # moved: period III every year
     - CS-E4825          # III-IV (also runs in IV)
     - ELEC-E8106        # III-IV (also runs in IV)
     - CS-E4890          # III-IV (also runs in IV)
 
-  "2026-2027/IV":       # spring IV
+  "2026-2027/IV":       # spring IV (~15 op)
     - MAST32004
-    - MAST31710
-    - MAST31041
+    - MAST31052         # Probability theory -- prereq for 31706 (27-28/I), so it must land
+                        # in year 1. Period UNVERIFIED (no published offering) -> confirm.
     - CS-E4891          # IV-V (also runs in V)
     - CS-E4825          # III-IV, 2nd period
     - ELEC-E8106        # III-IV, 2nd period
@@ -37,37 +51,51 @@ plan:
   "2026-2027/V":        # spring V (Aalto-only; HY has no period V)
     - CS-E4891          # IV-V, 2nd period
 
-  "2027-2028/I":        # autumn I
+  "2027-2028/I":        # autumn I (~28 op)
     - MAST32001
-    - MAST30133
+    - MAST30133         # no 27-28 offering published yet; if it never appears, swap MAST33021
+    - MAST32020         # NEW: Stochastic processes (stats core), period I
     - MS-E1651
-    - CS-E407524        # Causal Inference (3 op); Special Course, offering-dependent
+    - MAST31706         # Stochastic analysis I (period I) -- after 31051; 31052 ideally too
     - CS-E4715          # I-II (also runs in II)
     - ELEC-E8125        # I-II (also runs in II)
 
-  "2027-2028/II":       # autumn II
+  "2027-2028/II":       # autumn II (~26 op, +5 if CS-E4875 happens)
     - MAST32017
-    - MAST32006
-    - FIN-E0318
-    - MAST31908
+    - MAST32006         # biennial, 2027-28 expected; offering unconfirmed
+    - MAST31710         # Stochastic analysis II (period II) -- follows 31706
+    - MAST31908         # offering unconfirmed ("varying")
     - CS-E4875          # Research Project ~5 op; CONTINGENT (teacher permission + offering); or CS-E4876
     - CS-E4715          # I-II, 2nd period
     - ELEC-E8125        # I-II, 2nd period
+    # FALLBACK SLOT: MS-C2128 (Aalto, autumn II yearly) lands here if MAST32008
+    # gets no 27-28 offering -- last chance inside the Aalto deadline.
 
-  "2027-2028/III": []
+  "2027-2028/III":      # spring III (~26 op incl. thesis)
+    - MAST32008         # DEADLINE-CRITICAL: feeds the Aalto MS-C2128 substitution.
+                        # Offering unconfirmed ("usually period 3") -> verify the moment
+                        # HY publishes 27-28 offerings; if absent, take MS-C2128 in 27-28/II.
+    - MAST31036         # convex opt I: tentative ("varies", no 26-27 offering)
+    - MAST30011         # Master's seminar I (2 op; runs periods I and III)
     # thesis: Aalto finance thesis (20 op, 10 op/period over III-IV) + FIN-E0599 seminar 4 op
 
-  "2027-2028/IV": []
-    # thesis: Aalto finance thesis -> defence; Aalto MSc Finance complete (spring 2028)
+  "2027-2028/IV":       # spring IV (~15 op incl. thesis)
+    - MAST31041         # convex opt II: tentative, follows 31036
+    # thesis: Aalto finance thesis -> defence. Substitution paperwork
+    # (MAST32007+32008 -> MS-C2128) must clear before graduation.
+    # Aalto MSc Finance complete (spring 2028).
 
   "2027-2028/V": []
-    # thesis: HY math thesis (MAST31000, 30 op, 10 op/period over V + 2028-2029 I-II)
+    # thesis: HY stats thesis (MAST30000, 30 op, 10 op/period over V + 2028-2029 I-II)
 
-  "2028-2029/I": []
-    # thesis: HY math thesis
+  "2028-2029/I":
+    - CS-E407524        # Causal Inference (3 op); Special Course, offering-dependent --
+                        # deferred here to keep 27-28/I at the 30-op cap
+    # thesis: HY stats thesis
 
-  "2028-2029/II": []
-    # thesis: HY math thesis -> defence; HY MSc Math complete (Dec 2028)
+  "2028-2029/II":
+    - MAST30012         # Master's seminar II (3 op; runs periods II and IV)
+    # thesis: HY stats thesis -> defence; HY MSc (statistics track) complete (Dec 2028)
 
 constraints:
   max_credits_per_period: 30
